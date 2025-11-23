@@ -27,8 +27,8 @@ export default function AppDropLanding() {
       <header className="relative z-20">
         <nav className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center text-black font-bold">AD</div>
-            <span className="font-bold text-lg">AppDrop</span>
+            <div className="w-20 h-10 rounded-lg bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center text-black font-bold">AppDrop</div>
+            {/* <span className="font-bold text-lg">AppDrop</span> */}
           </div>
 
           <div className="hidden md:flex gap-4 items-center">
@@ -310,30 +310,62 @@ function FeatureShowcase() {
 /***********************************/
 function AppUIPreview() {
   const screens = [
-    { title: "Home", img: "https://dummyimage.com/320x640/1e1b4b/ffffff&text=Home" },
-    { title: "Catalog", img: "https://dummyimage.com/320x640/2b1e5a/ffffff&text=Catalog" },
-    { title: "Product", img: "https://dummyimage.com/320x640/3a1f6f/ffffff&text=Product" },
-    { title: "Cart", img: "https://dummyimage.com/320x640/461a87/ffffff&text=Cart" },
+    { title: "Home", img: "/assets/app_ui/1.png" },
+    { title: "Catalog", img: "/assets/app_ui/2.png" },
+    { title: "Product", img: "/assets/app_ui/3.png" },
+    // { title: "Cart", img: "/assets/app_ui/home1.png" },
   ];
-
   return (
     <section className="py-20 bg-gradient-to-b from-black/60 to-transparent">
       <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-8">Live App Screens</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-8">
+          Live App Screens
+        </h2>
 
+        {/* Scrollable container */}
         <div className="overflow-x-auto no-scrollbar py-6">
-          <div className="flex gap-6 px-4">
+          
+          {/* Centered row */}
+          <div className="flex justify-center gap-6 mx-auto w-fit px-4">
+
             {screens.map((s) => (
-              <motion.div key={s.title} whileHover={{ scale: 1.02 }} className="w-[220px] md:w-[260px] lg:w-[300px] rounded-3xl overflow-hidden border border-purple-700 shadow-lg">
+              <motion.div
+                key={s.title}
+                whileHover={{ scale: 1.02 }}
+                className="flex-shrink-0 w-[220px] md:w-[260px] lg:w-[300px] rounded-3xl overflow-hidden
+                           border border-purple-700 shadow-lg"
+              >
                 <img src={s.img} alt={s.title} className="w-full h-auto object-cover" />
                 <div className="p-4 bg-[#060616]">
                   <h4 className="text-lg text-purple-300 font-semibold">{s.title}</h4>
                 </div>
               </motion.div>
             ))}
+
           </div>
         </div>
       </div>
     </section>
   );
+
+  // return (
+  //   <section className="py-20 bg-gradient-to-b from-black/60 to-transparent">
+  //     <div className="max-w-6xl mx-auto px-6">
+  //       <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-8">Live App Screens</h2>
+
+  //       <div className="overflow-x-auto no-scrollbar py-6">
+  //         <div className="flex gap-6 px-4">
+  //           {screens.map((s) => (
+  //             <motion.div key={s.title} whileHover={{ scale: 1.02 }} className="w-[220px] md:w-[260px] lg:w-[300px] rounded-3xl overflow-hidden border border-purple-700 shadow-lg">
+  //               <img src={s.img} alt={s.title} className="w-full h-auto object-cover" />
+  //               <div className="p-4 bg-[#060616]">
+  //                 <h4 className="text-lg text-purple-300 font-semibold">{s.title}</h4>
+  //               </div>
+  //             </motion.div>
+  //           ))}
+  //         </div>
+  //       </div>
+  //     </div>
+  //   </section>
+  // );
 }
