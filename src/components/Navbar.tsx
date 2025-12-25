@@ -45,11 +45,15 @@ const Navbar = ({ onOpenWaitlist }: NavbarProps) => {
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2">
-              <div className="w-10 h-10 gradient-bg rounded-xl flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-lg">A</span>
-              </div>
-              <span className="text-xl font-bold text-foreground">AppDrop</span>
-            </Link>
+  <div className="w-130 h-50 flex items-center justify-center">
+    <img
+      src="https://cdn.shopify.com/s/files/1/0734/7155/7942/files/AppDrop_Black_Logo.png?v=1766657135"
+      alt="AppDrop logo"
+      className="h-9 w-auto object-contain"
+    />
+  </div> 
+</Link>
+
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">

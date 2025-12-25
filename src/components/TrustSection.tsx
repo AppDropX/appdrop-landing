@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 
 const TrustSection = () => {
-  const logos = [
-    "VOGUE", "ELLE", "GQ", "Forbes", "TechCrunch", "Wired"
+  const technologies = [
+    "Flutter", "Golang", "Firebase", "PostgreSQL", "Redis", "AWS"
   ];
 
   return (
@@ -16,30 +16,30 @@ const TrustSection = () => {
           className="text-center"
         >
           <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-8">
-            Built for modern Shopify brands
+            Built with cutting-edge technology
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 lg:gap-16">
-            {logos.map((logo, index) => (
+            {technologies.map((tech, index) => (
               <motion.div
-                key={logo}
+                key={tech}
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
                 className="text-2xl md:text-3xl font-bold text-muted-foreground/40 hover:text-muted-foreground/60 transition-colors"
               >
-                {logo}
+                {tech}
               </motion.div>
             ))}
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16">
             {[
-              { value: "10K+", label: "Apps Published" },
-              { value: "500M+", label: "Push Sent" },
+              { value: "50ms", label: "Response Time" },
+              { value: "1M+", label: "Data Points Analyzed" },
               { value: "99.9%", label: "Uptime" },
-              { value: "4.9★", label: "App Rating" },
+              { value: "Real-time", label: "Analytics Updates" },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}
