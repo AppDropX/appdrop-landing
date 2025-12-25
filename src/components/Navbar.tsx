@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
 interface NavbarProps {
@@ -10,6 +11,8 @@ interface NavbarProps {
 const Navbar = ({ onOpenWaitlist }: NavbarProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,10 +23,10 @@ const Navbar = ({ onOpenWaitlist }: NavbarProps) => {
   }, []);
 
   const navLinks = [
-    { label: "Features", href: "#features" },
-    { label: "How It Works", href: "#how-it-works" },
-    { label: "Use Cases", href: "#use-cases" },
-    { label: "FAQ", href: "#faq" },
+    { label: "Features", href: isHomePage ? "#features" : "/features", isAnchor: isHomePage },
+    { label: "How It Works", href: isHomePage ? "#how-it-works" : "/#how-it-works", isAnchor: isHomePage },
+    { label: "About", href: "/about", isAnchor: false },
+    { label: "Contact", href: "/contact", isAnchor: false },
   ];
 
   return (
@@ -41,23 +44,33 @@ const Navbar = ({ onOpenWaitlist }: NavbarProps) => {
         <div className="section-container">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <a href="#" className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2">
               <div className="w-10 h-10 gradient-bg rounded-xl flex items-center justify-center">
                 <span className="text-primary-foreground font-bold text-lg">A</span>
               </div>
               <span className="text-xl font-bold text-foreground">AppDrop</span>
-            </a>
+            </Link>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
               {navLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="text-muted-foreground hover:text-foreground transition-colors font-medium"
-                >
-                  {link.label}
-                </a>
+                link.isAnchor ? (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    className="text-muted-foreground hover:text-foreground transition-colors font-medium"
+                  >
+                    {link.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={link.label}
+                    to={link.href}
+                    className="text-muted-foreground hover:text-foreground transition-colors font-medium"
+                  >
+                    {link.label}
+                  </Link>
+                )
               ))}
             </div>
 
@@ -94,14 +107,25 @@ const Navbar = ({ onOpenWaitlist }: NavbarProps) => {
       >
         <div className="section-container py-6 space-y-4">
           {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="block text-lg text-muted-foreground hover:text-foreground transition-colors font-medium py-2"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {link.label}
-            </a>
+            link.isAnchor ? (
+              <a
+                key={link.label}
+                href={link.href}
+                className="block text-lg text-muted-foreground hover:text-foreground transition-colors font-medium py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {link.label}
+              </a>
+            ) : (
+              <Link
+                key={link.label}
+                to={link.href}
+                className="block text-lg text-muted-foreground hover:text-foreground transition-colors font-medium py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            )
           ))}
           <Button
             onClick={() => {
