@@ -1,0 +1,110 @@
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+
+interface FooterProps {
+  onOpenWaitlist: () => void;
+}
+
+const Footer = ({ onOpenWaitlist }: FooterProps) => {
+  const footerLinks = {
+    Product: [
+      { label: "Features", href: "#features" },
+      { label: "How It Works", href: "#how-it-works" },
+      { label: "Use Cases", href: "#use-cases" },
+      { label: "Pricing", href: "#" },
+    ],
+    Company: [
+      { label: "About", href: "#" },
+      { label: "Blog", href: "#" },
+      { label: "Careers", href: "#" },
+      { label: "Contact", href: "#" },
+    ],
+    Resources: [
+      { label: "Documentation", href: "#" },
+      { label: "Help Center", href: "#" },
+      { label: "Community", href: "#" },
+      { label: "Partners", href: "#" },
+    ],
+    Legal: [
+      { label: "Privacy", href: "#" },
+      { label: "Terms", href: "#" },
+      { label: "Security", href: "#" },
+    ],
+  };
+
+  return (
+    <footer className="bg-foreground text-primary-foreground">
+      <div className="section-container py-16 lg:py-20">
+        <div className="grid lg:grid-cols-5 gap-12 mb-12">
+          {/* Brand */}
+          <div className="lg:col-span-2">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <a href="#" className="flex items-center gap-2 mb-4">
+                <div className="w-10 h-10 gradient-bg rounded-xl flex items-center justify-center">
+                  <span className="text-primary-foreground font-bold text-lg">A</span>
+                </div>
+                <span className="text-xl font-bold">AppDrop</span>
+              </a>
+              <p className="text-primary-foreground/70 mb-6 max-w-xs">
+                Turn your Shopify store into a beautiful native mobile app. No code required.
+              </p>
+              <Button onClick={onOpenWaitlist} variant="hero" size="default">
+                Join the Waitlist
+              </Button>
+            </motion.div>
+          </div>
+
+          {/* Links */}
+          {Object.entries(footerLinks).map(([category, links], index) => (
+            <motion.div
+              key={category}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <h4 className="font-semibold mb-4">{category}</h4>
+              <ul className="space-y-3">
+                {links.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Bottom */}
+        <div className="pt-8 border-t border-primary-foreground/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-primary-foreground/50">
+            © {new Date().getFullYear()} AppDrop. All rights reserved.
+          </p>
+          <div className="flex items-center gap-4">
+            {["Twitter", "LinkedIn", "Instagram"].map((social) => (
+              <a
+                key={social}
+                href="#"
+                className="text-sm text-primary-foreground/50 hover:text-primary-foreground transition-colors"
+              >
+                {social}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
