@@ -7,6 +7,7 @@ import HowItWorksSection from "@/components/HowItWorksSection";
 import FeaturesSection from "@/components/FeaturesSection";
 import MidPageCTA from "@/components/MidPageCTA";
 import WhyAppDropSection from "@/components/WhyAppDropSection";
+import DashboardFlowSection from "@/components/DashboardFlowSection";
 import UseCasesSection from "@/components/UseCasesSection";
 import WaitlistCTASection from "@/components/WaitlistCTASection";
 import FAQSection from "@/components/FAQSection";
@@ -44,12 +45,13 @@ const Index = () => {
         
         <main>
           <HeroSection onOpenWaitlist={() => setIsWaitlistOpen(true)} />
-          <TrustSection />
           <HowItWorksSection />
           <FeaturesSection />
           <MidPageCTA onOpenWaitlist={() => setIsWaitlistOpen(true)} />
           <WhyAppDropSection />
+          <DashboardFlowSection />
           <UseCasesSection />
+          <TrustSection />
           <WaitlistCTASection />
           <FAQSection />
         </main>

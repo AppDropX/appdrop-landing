@@ -91,22 +91,22 @@ const HeroSection = ({ onOpenWaitlist }: HeroSectionProps) => {
             </motion.div>
           </div>
 
-          {/* Phone Mockups */}
+          {/* Phone Mockup - Professional & Consistent */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="relative flex justify-center lg:justify-end"
+            className="relative flex justify-center items-center"
           >
             <div className="relative">
               {/* Main Phone */}
-              <div className="relative z-20 animate-float">
-                <div className="w-64 sm:w-72 lg:w-80 aspect-[9/19] bg-foreground rounded-[3rem] p-2 shadow-2xl glow">
-                  <div className="w-full h-full bg-card rounded-[2.5rem] overflow-hidden relative">
+              <div className="relative z-20">
+                <div className="w-56 sm:w-64 md:w-72 lg:w-80 aspect-[9/19] bg-foreground rounded-[2.5rem] sm:rounded-[3rem] p-1.5 sm:p-2 shadow-2xl glow">
+                  <div className="w-full h-full bg-card rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden relative">
                     {/* Phone Notch */}
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-7 bg-foreground rounded-b-2xl z-10" />
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 sm:w-28 h-6 sm:h-7 bg-foreground rounded-b-2xl z-10" />
                     
-                    {/* Screen Content with Real Image */}
+                    {/* Screen Content */}
                     <img 
                       src={appScreenImage} 
                       alt="AppDrop mobile app preview showing a fashion e-commerce store"
@@ -114,55 +114,46 @@ const HeroSection = ({ onOpenWaitlist }: HeroSectionProps) => {
                     />
                   </div>
                 </div>
+
+                {/* Phone Shine Effect */}
+                <div className="absolute inset-0 rounded-[2.5rem] sm:rounded-[3rem] bg-gradient-to-br from-white/20 via-transparent to-transparent pointer-events-none" />
               </div>
 
-              {/* Secondary Phone */}
-              <div className="absolute -left-16 top-20 z-10 hidden sm:block opacity-60">
-                <div className="w-52 lg:w-60 aspect-[9/19] bg-foreground/80 rounded-[2.5rem] p-2 shadow-xl -rotate-12">
-                  <div className="w-full h-full bg-card rounded-[2rem] overflow-hidden">
-                    <div className="h-full pt-8 pb-4 px-3">
-                      <div className="w-16 h-5 bg-muted rounded-lg mx-auto mb-3" />
-                      <div className="space-y-2">
-                        {[1, 2, 3].map((i) => (
-                          <div key={i} className="h-16 bg-muted rounded-xl" />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Floating Elements */}
+              {/* Floating Badge - Push Notification */}
               <motion.div
-                animate={{ y: [0, -10, 0] }}
+                animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -right-4 top-1/4 z-30 hidden lg:block"
+                className="absolute -right-2 sm:-right-6 lg:-right-12 top-16 sm:top-20 z-30"
               >
-                <div className="glass px-4 py-3 rounded-2xl flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center">
-                    <svg className="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="glass px-3 sm:px-4 py-2 sm:py-3 rounded-xl sm:rounded-2xl flex items-center gap-2 sm:gap-3 shadow-lg">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary/20 flex items-center justify-center">
+                    <svg className="w-4 h-4 sm:w-5 sm:h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                     </svg>
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-foreground">Push Notification</p>
-                    <p className="text-xs text-muted-foreground">Sale alert sent!</p>
+                    <p className="text-xs sm:text-sm font-semibold text-foreground">Push Notification</p>
+                    <p className="text-[10px] sm:text-xs text-muted-foreground">Sale alert sent!</p>
                   </div>
                 </div>
               </motion.div>
 
+              {/* Floating Badge - Synced */}
               <motion.div
-                animate={{ y: [0, 10, 0] }}
+                animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                className="absolute -left-8 bottom-1/4 z-30 hidden lg:block"
+                className="absolute -left-2 sm:-left-6 lg:-left-12 bottom-24 sm:bottom-32 z-30"
               >
-                <div className="glass px-4 py-3 rounded-2xl">
+                <div className="glass px-3 sm:px-4 py-2 sm:py-3 rounded-xl sm:rounded-2xl shadow-lg">
                   <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-accent" />
-                    <p className="text-sm font-medium text-foreground">Synced with Shopify</p>
+                    <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                    <p className="text-xs sm:text-sm font-medium text-foreground">Synced with Shopify</p>
                   </div>
                 </div>
               </motion.div>
+
+              {/* Decorative Glow */}
+              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-48 h-24 bg-primary/30 rounded-full blur-3xl -z-10" />
             </div>
           </motion.div>
         </div>
