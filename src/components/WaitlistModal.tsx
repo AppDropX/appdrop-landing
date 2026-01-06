@@ -1,24 +1,9 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  X,
-  CheckCircle,
-  Loader2,
-  User,
-  Building2,
-  Phone,
-  Mail,
-} from "lucide-react";
+import { X, CheckCircle, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 
 interface WaitlistModalProps {
   isOpen: boolean;
@@ -26,26 +11,21 @@ interface WaitlistModalProps {
 }
 
 interface FormData {
-  firstName: string;
-  lastName: string;
+  fullName: string;
   email: string;
   phone: string;
   companyName: string;
-  companySize: string;
-  website: string;
-  monthlyRevenue: string;
 }
 
 const initialFormData: FormData = {
-  firstName: "",
-  lastName: "",
+  fullName: "",
   email: "",
   phone: "",
   companyName: "",
-  companySize: "",
-  website: "",
-  monthlyRevenue: "",
 };
+
+const SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbyXWp1wuYN5Hz7qIJASI2-dPr4e4wSVe6bkaI0jxNVF5XI03FMKJ8PCt_3Ku0NvshNgHw/exec";
 
 const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
   const [formData, setFormData] = useState<FormData>(initialFormData);
@@ -55,15 +35,19 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
 
   const validateForm = () => {
     const newErrors: Partial<FormData> = {};
-    if (!formData.firstName.trim())
-      newErrors.firstName = "First name is required";
-    if (!formData.lastName.trim())
-      newErrors.lastName = "Last name is required";
+
+    if (!formData.fullName.trim())
+      newErrors.fullName = "Full name is required";
+
     if (!formData.email.trim()) {
       newErrors.email = "Email is required";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = "Please enter a valid email";
     }
+
+    if (!formData.phone.trim())
+      newErrors.phone = "Contact number is required";
+
     if (!formData.companyName.trim())
       newErrors.companyName = "Company name is required";
 
@@ -76,9 +60,26 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-    await new Promise((r) => setTimeout(r, 1500));
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+
+    try {
+      const body = new URLSearchParams({
+        name: formData.fullName,
+        email: formData.email,
+        phone: formData.phone,
+        companyName: formData.companyName,
+      });
+
+      await fetch(SCRIPT_URL, {
+        method: "POST",
+        body, // ❗ no headers → no CORS preflight
+      });
+
+      setIsSubmitted(true);
+    } catch (err) {
+      console.error("Failed to submit waitlist", err);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleClose = () => {
@@ -110,7 +111,7 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
             className="fixed inset-0 z-40 bg-foreground/20 backdrop-blur-sm"
           />
 
-          {/* Centering Wrapper */}
+          {/* Modal */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -118,9 +119,8 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
             className="fixed inset-0 z-50 flex items-center justify-center p-4"
           >
-            {/* Scroll Container */}
-            <div className="w-full max-w-lg max-h-[90vh] overflow-y-auto">
-              <div className="relative bg-card rounded-3xl p-8 shadow-2xl border border-border/50">
+            <div className="w-full max-w-lg">
+              <div className="relative bg-card rounded-3xl p-8 shadow-2xl border">
                 <button
                   onClick={handleClose}
                   className="absolute top-4 right-4 p-2 rounded-full hover:bg-muted"
@@ -131,21 +131,6 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
                 {!isSubmitted ? (
                   <>
                     <div className="text-center mb-6">
-                      <div className="w-16 h-16 gradient-bg rounded-2xl flex items-center justify-center mx-auto mb-4">
-                        <svg
-                          className="w-8 h-8 text-primary-foreground"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
-                          />
-                        </svg>
-                      </div>
                       <h3 className="text-2xl font-bold mb-2">
                         Join the Waitlist
                       </h3>
@@ -155,36 +140,19 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
                     </div>
 
                     <form onSubmit={handleSubmit} className="space-y-4">
-                      {/* First + Last Name */}
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <Label>First Name *</Label>
-                          <Input
-                            value={formData.firstName}
-                            onChange={(e) =>
-                              handleInputChange("firstName", e.target.value)
-                            }
-                          />
-                          {errors.firstName && (
-                            <p className="text-xs text-destructive">
-                              {errors.firstName}
-                            </p>
-                          )}
-                        </div>
-                        <div>
-                          <Label>Last Name *</Label>
-                          <Input
-                            value={formData.lastName}
-                            onChange={(e) =>
-                              handleInputChange("lastName", e.target.value)
-                            }
-                          />
-                          {errors.lastName && (
-                            <p className="text-xs text-destructive">
-                              {errors.lastName}
-                            </p>
-                          )}
-                        </div>
+                      <div>
+                        <Label>Full Name *</Label>
+                        <Input
+                          value={formData.fullName}
+                          onChange={(e) =>
+                            handleInputChange("fullName", e.target.value)
+                          }
+                        />
+                        {errors.fullName && (
+                          <p className="text-xs text-destructive">
+                            {errors.fullName}
+                          </p>
+                        )}
                       </div>
 
                       <div>
@@ -198,6 +166,21 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
                         {errors.email && (
                           <p className="text-xs text-destructive">
                             {errors.email}
+                          </p>
+                        )}
+                      </div>
+
+                      <div>
+                        <Label>Contact Number *</Label>
+                        <Input
+                          value={formData.phone}
+                          onChange={(e) =>
+                            handleInputChange("phone", e.target.value)
+                          }
+                        />
+                        {errors.phone && (
+                          <p className="text-xs text-destructive">
+                            {errors.phone}
                           </p>
                         )}
                       </div>

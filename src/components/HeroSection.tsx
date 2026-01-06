@@ -104,7 +104,7 @@ const HeroSection = ({ onOpenWaitlist }: HeroSectionProps) => {
                 <div className="w-56 sm:w-64 md:w-72 lg:w-80 aspect-[9/19] bg-foreground rounded-[2.5rem] sm:rounded-[3rem] p-1.5 sm:p-2 shadow-2xl glow">
                   <div className="w-full h-full bg-card rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden relative">
                     {/* Phone Notch */}
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 sm:w-28 h-6 sm:h-7 bg-foreground rounded-b-2xl z-10" />
+                     
                     
                     {/* Screen Content */}
                     <img 
