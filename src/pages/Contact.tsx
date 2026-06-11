@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
-import { Mail, MessageSquare, MapPin, Clock, Send, Loader2 } from "lucide-react";
+import { Mail, MessageSquare, MapPin, Clock, Send, Loader2, Building2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WaitlistModal from "@/components/WaitlistModal";
@@ -11,30 +11,48 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 
+const addresses = {
+  office:
+    "D42 Dr. Ambedkar Colony, 100 Feet Rd, opposite Vishal Megamart, Phase 1, Chattarpur Enclave, New Delhi, Delhi - 110074, India",
+  registered:
+    "No. 44, New Manglam Complex, Shobhagpura, Udaipur, Rajasthan – 313001, India",
+};
+
 const contactInfo = [
   {
     icon: Mail,
     title: "Email Us",
-    description: "hello@appdrop.io",
-    detail: "We'll respond within 24 hours",
+    description: "hello@appdrop.co",
+    detail: "For general enquiries and support",
+    href: "mailto:hello@appdrop.co",
   },
   {
     icon: MessageSquare,
     title: "Live Chat",
     description: "Chat with our team",
-    detail: "Available Mon-Fri, 9am-6pm EST",
-  },
-  {
-    icon: MapPin,
-    title: "Office",
-    description: "San Francisco, CA",
-    detail: "United States",
+    detail: "Available Mon–Fri, 10:00 AM – 6:00 PM IST",
+    href: undefined,
   },
   {
     icon: Clock,
-    title: "Response Time",
-    description: "Within 24 hours",
-    detail: "Usually much faster",
+    title: "Working Hours",
+    description: "Mon–Fri, 10:00 AM – 6:00 PM IST",
+    detail: "Excluding public holidays",
+    href: undefined,
+  },
+  {
+    icon: MapPin,
+    title: "Registered Office",
+    description: "Udaipur, Rajasthan",
+    detail: addresses.registered,
+    href: undefined,
+  },
+  {
+    icon: Building2,
+    title: "Office",
+    description: "New Delhi, Delhi",
+    detail: addresses.office,
+    href: undefined,
   },
 ];
 
@@ -92,28 +110,40 @@ const Contact = () => {
                 Get in <span className="text-gradient">Touch</span>
               </h1>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+                Have questions? We&apos;d love to hear from you. Send us a message and
+                we&apos;ll respond as soon as possible.
               </p>
             </motion.div>
           </section>
 
           {/* Contact Info Cards */}
           <section className="section-container mb-16">
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="flex flex-wrap justify-center gap-6">
               {contactInfo.map((info, index) => (
                 <motion.div
                   key={info.title}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-card rounded-2xl p-6 border border-border/50 text-center"
+                  className="bg-card rounded-2xl p-6 border border-border/50 text-center flex flex-col items-center w-full sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)] max-w-[427px] h-[226px]"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 shrink-0">
                     <info.icon className="w-6 h-6 text-primary" />
                   </div>
-                  <h3 className="font-semibold text-foreground mb-1">{info.title}</h3>
-                  <p className="text-foreground font-medium">{info.description}</p>
-                  <p className="text-sm text-muted-foreground">{info.detail}</p>
+                  <h3 className="font-semibold text-foreground mb-1 shrink-0">{info.title}</h3>
+                  {info.href ? (
+                    <a
+                      href={info.href}
+                      className="text-foreground font-medium hover:text-primary transition-colors shrink-0"
+                    >
+                      {info.description}
+                    </a>
+                  ) : (
+                    <p className="text-foreground font-medium shrink-0">{info.description}</p>
+                  )}
+                  <p className="text-sm text-muted-foreground leading-snug mt-1 flex-1 flex items-start justify-center">
+                    {info.detail}
+                  </p>
                 </motion.div>
               ))}
             </div>

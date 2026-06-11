@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import appScreenImage from "@/assets/app-screen.png";
+import mobileScreenImage from "@/assets/mobile-screen.png";
 
 interface HeroSectionProps {
   onOpenWaitlist: () => void;
@@ -101,22 +101,11 @@ const HeroSection = ({ onOpenWaitlist }: HeroSectionProps) => {
             <div className="relative">
               {/* Main Phone */}
               <div className="relative z-20">
-                <div className="w-56 sm:w-64 md:w-72 lg:w-80 aspect-[9/19] bg-foreground rounded-[2.5rem] sm:rounded-[3rem] p-1.5 sm:p-2 shadow-2xl glow">
-                  <div className="w-full h-full bg-card rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden relative">
-                    {/* Phone Notch */}
-                     
-                    
-                    {/* Screen Content */}
-                    <img 
-                      src={appScreenImage} 
-                      alt="AppDrop mobile app preview showing a fashion e-commerce store"
-                      className="w-full h-full object-cover object-top"
-                    />
-                  </div>
-                </div>
-
-                {/* Phone Shine Effect */}
-                <div className="absolute inset-0 rounded-[2.5rem] sm:rounded-[3rem] bg-gradient-to-br from-white/20 via-transparent to-transparent pointer-events-none" />
+                <img
+                  src={mobileScreenImage}
+                  alt="AppDrop mobile app preview"
+                  className="w-64 sm:w-72 md:w-80 lg:w-96 h-auto object-contain bg-transparent"
+                />
               </div>
 
               {/* Floating Badge - Push Notification */}
