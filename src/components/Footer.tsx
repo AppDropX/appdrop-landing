@@ -10,6 +10,7 @@ const Footer = ({ onOpenWaitlist }: FooterProps) => {
   const footerLinks = {
     Product: [
       { label: "Features", href: "/features", isRoute: true },
+      { label: "Pricing", href: "/#pricing", isRoute: false },
       { label: "How It Works", href: "/#how-it-works", isRoute: false },
       { label: "Use Cases", href: "/#use-cases", isRoute: false },
     ],

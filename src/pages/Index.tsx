@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import TrustSection from "@/components/TrustSection";
+import PricingSection from "@/components/PricingSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
 import FeaturesSection from "@/components/FeaturesSection";
 import MidPageCTA from "@/components/MidPageCTA";
@@ -52,6 +53,7 @@ const Index = () => {
           <DashboardFlowSection />
           <UseCasesSection />
           <TrustSection />
+          <PricingSection />
           <WaitlistCTASection />
           <FAQSection />
         </main>

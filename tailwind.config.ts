@@ -110,6 +110,7 @@ export default {
       },
       boxShadow: {
         glow: "0 0 60px -15px hsl(var(--glow) / 0.4)",
+        "glow-sm": "0 4px 20px -8px hsl(var(--glow) / 0.15)",
         "glow-lg": "0 0 80px -20px hsl(var(--glow) / 0.5)",
       },
     },

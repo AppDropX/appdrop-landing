@@ -24,6 +24,7 @@ const Navbar = ({ onOpenWaitlist }: NavbarProps) => {
 
   const navLinks = [
     { label: "Features", href: isHomePage ? "#features" : "/features", isAnchor: isHomePage },
+    { label: "Pricing", href: isHomePage ? "#pricing" : "/#pricing", isAnchor: isHomePage },
     { label: "How It Works", href: isHomePage ? "#how-it-works" : "/#how-it-works", isAnchor: isHomePage },
     { label: "About", href: "/about", isAnchor: false },
     { label: "Contact", href: "/contact", isAnchor: false },
