@@ -21,10 +21,10 @@ const MidPageCTA = ({ onOpenWaitlist }: MidPageCTAProps) => {
         >
           <div>
             <h3 className="text-2xl md:text-3xl font-bold text-primary-foreground mb-2">
-              Ready to go mobile?
+              Ready to start building?
             </h3>
             <p className="text-primary-foreground/80 text-lg">
-              Join 500+ Shopify merchants on the waitlist today.
+              Book a demo and see how AppDrop Builder turns your Shopify brand into a mobile app experience.
             </p>
           </div>
           
@@ -34,7 +34,7 @@ const MidPageCTA = ({ onOpenWaitlist }: MidPageCTAProps) => {
             size="lg"
             className="bg-primary-foreground text-primary hover:bg-primary-foreground/90"
           >
-            Join the Waitlist
+            Book Demo
             <ArrowRight className="w-5 h-5" />
           </Button>
         </motion.div>

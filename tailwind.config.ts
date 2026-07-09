@@ -14,7 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+        sans: ['"Hanken Grotesk"', 'system-ui', 'sans-serif'],
+        display: ['"Bricolage Grotesque"', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -65,6 +67,10 @@ export default {
           elevated: "hsl(var(--surface-elevated))",
         },
         glow: "hsl(var(--glow))",
+        teal: {
+          DEFAULT: "hsl(var(--teal))",
+          deep: "hsl(var(--teal-deep))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

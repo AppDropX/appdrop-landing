@@ -20,10 +20,10 @@ const PricingCard = ({ plan, index }: PricingCardProps) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="min-w-[280px] snap-center shrink-0 sm:min-w-0 sm:shrink"
+      className="min-w-[min(280px,calc(100%-0.5rem))] snap-center shrink-0 sm:min-w-0 sm:shrink"
     >
       <div
-        className="group flex h-full flex-col rounded-3xl bg-card border border-border/50 p-6 sm:p-7 transition-all duration-300 hover:scale-[1.02] hover:border-primary hover:shadow-glow-sm hover:-translate-y-1"
+        className="group flex h-full flex-col rounded-2xl sm:rounded-3xl bg-card border border-border/50 p-5 sm:p-7 transition-all duration-300 hover:scale-[1.02] hover:border-primary hover:shadow-glow-sm hover:-translate-y-1"
       >
         <div className="mb-5">
           <h3 className="text-xl font-bold text-foreground">{plan.name}</h3>
@@ -44,8 +44,8 @@ const PricingCard = ({ plan, index }: PricingCardProps) => {
             </div>
           )}
 
-          <div className="flex items-baseline justify-between gap-3">
-            <span className="text-3xl font-bold text-foreground tracking-tight tabular-nums">
+          <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-3">
+            <span className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight tabular-nums">
               {formatPrice(plan.price)}
             </span>
             {plan.savings && (

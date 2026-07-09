@@ -1,34 +1,72 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
-import { Target, Users, Zap, Heart } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Heart, Target, Users, Zap } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WaitlistModal from "@/components/WaitlistModal";
-import { Button } from "@/components/ui/button";
+import appdropLogoIcon from "@/assets/appdrop-logo-icon.png";
+import parthPhoto from "@/assets/parth-pahuja.png";
+
+const heroMeta = [
+  { value: "2026", label: "founded" },
+  { value: "No-code", label: "visual builder" },
+  { value: "iOS + Android", label: "from one canvas" },
+];
+
+const chapters = [
+  {
+    num: "01",
+    title: "The problem",
+    body: "Mobile commerce is growing rapidly, but most Shopify merchants can't afford or access native mobile apps. Traditional app development is expensive, complex, and slow.",
+  },
+  {
+    num: "02",
+    title: "The insight",
+    body: "Merchants don't need more agencies or bigger budgets — they need a faster path. We knew there had to be a better way to go from store to app.",
+  },
+  {
+    num: "03",
+    title: "The product",
+    body: "AppDrop is a visual Builder that helps merchants design a beautiful, high-performing mobile app before the heavy technical work begins. No code. Clear workflow. A faster path to mobile.",
+  },
+];
 
 const values = [
   {
     icon: Target,
     title: "Mission-Driven",
-    description: "We're on a mission to democratize mobile commerce for every Shopify merchant, regardless of technical expertise or budget.",
+    description:
+      "Democratizing mobile commerce for every Shopify merchant, regardless of technical expertise or budget.",
   },
   {
     icon: Users,
     title: "Customer-First",
-    description: "Every feature we build starts with understanding our customers' needs. Your success is our success.",
+    description:
+      "Every feature starts with understanding merchant needs. Your success is our success.",
   },
   {
     icon: Zap,
     title: "Innovation",
-    description: "We push the boundaries of what's possible with mobile technology to give you the best tools available.",
+    description:
+      "Pushing the boundaries of what's possible with mobile technology to give you the best tools.",
   },
   {
     icon: Heart,
     title: "Passion",
-    description: "We're passionate about helping merchants grow their businesses and connect with customers in meaningful ways.",
+    description:
+      "Helping merchants grow their businesses and connect with customers in meaningful ways.",
   },
 ];
+
+const LinkedInIcon = () => (
+  <span className="li-btn-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0ZM0 8h5v16H0V8Zm7.5 0h4.78v2.2h.07c.67-1.2 2.3-2.46 4.73-2.46C22.4 7.74 24 10.1 24 14.36V24h-5v-8.5c0-2.03-.73-3.42-2.55-3.42-1.39 0-2.22.94-2.58 1.84-.14.32-.17.77-.17 1.22V24h-5V8Z" />
+    </svg>
+  </span>
+);
 
 const About = () => {
   const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
@@ -36,146 +74,221 @@ const About = () => {
   return (
     <>
       <Helmet>
-        <title>About Us - AppDrop | Our Mission & Team</title>
-        <meta 
-          name="description" 
-          content="Learn about AppDrop's mission to help Shopify merchants create native mobile apps. Meet our team and discover our values." 
+        <title>About AppDrop — Empowering Shopify Merchants</title>
+        <meta
+          name="description"
+          content="AppDrop is a no-code mobile app builder for Shopify stores. Meet the team building mobile commerce for every merchant."
         />
         <link rel="canonical" href="https://appdrop.io/about" />
       </Helmet>
 
-      <div className="min-h-screen bg-background">
+      <div className="min-h-dvh bg-background w-full">
         <Navbar onOpenWaitlist={() => setIsWaitlistOpen(true)} />
-        
-        <main className="pt-32 pb-20">
-          {/* Hero */}
-          <section className="section-container text-center mb-20">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
-                About Us
-              </span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
-                Empowering Shopify{" "}
-                <span className="text-gradient">Merchants</span>
-              </h1>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                We believe every Shopify store deserves a world-class mobile app experience.
-              </p>
-            </motion.div>
-          </section>
 
-          {/* Story Section */}
-          <section className="section-container mb-20">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <main className="pt-[var(--site-header-offset)]">
+          <section className="about-hero">
+            <img
+              src={appdropLogoIcon}
+              alt=""
+              aria-hidden="true"
+              className="about-hero-mark"
+            />
+            <div className="section-container">
               <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
               >
-                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                  Our Story
-                </h2>
-                <div className="space-y-4 text-muted-foreground text-lg leading-relaxed">
-                  <p>
-                    AppDrop was born from a simple observation: mobile commerce is growing rapidly, but most Shopify merchants can't afford or access native mobile apps.
-                  </p>
-                  <p>
-                    Traditional app development costs tens of thousands of dollars and takes months. We knew there had to be a better way.
-                  </p>
-                  <p>
-                    That's why we built AppDrop — a platform that lets anyone create a beautiful, high-performing native mobile app in minutes, not months. No code. No hassle. Just results.
-                  </p>
-                </div>
-              </motion.div>
-              
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="relative"
-              >
-                <div className="aspect-square bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="w-24 h-24 gradient-bg rounded-2xl flex items-center justify-center mx-auto mb-4">
-                      <span className="text-primary-foreground font-bold text-4xl">A</span>
+                <div className="about-kicker">About AppDrop</div>
+                <h1>
+                  Mobile apps, within reach of <em>every merchant</em>.
+                </h1>
+                <p className="about-hero-sub">
+                  We believe every Shopify store deserves a world-class mobile app
+                  experience — not just the brands that can afford an engineering team.
+                </p>
+                <div className="about-hero-meta">
+                  {heroMeta.map((item) => (
+                    <div key={item.label}>
+                      <b>{item.value}</b>
+                      <span>{item.label}</span>
                     </div>
-                    <p className="text-2xl font-bold text-foreground">AppDrop</p>
-                    <p className="text-muted-foreground">Since 2024</p>
-                  </div>
+                  ))}
                 </div>
               </motion.div>
             </div>
           </section>
 
-          {/* Values */}
-          <section className="section-container mb-20">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="text-center mb-12"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Our Values
-              </h2>
-              <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-                The principles that guide everything we do.
-              </p>
-            </motion.div>
+          <section className="about-story">
+            <div className="section-container">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="about-story-head mb-10 sm:mb-14"
+              >
+                <div className="about-kicker">Our story</div>
+                <h2>Why we&apos;re building AppDrop</h2>
+              </motion.div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {values.map((value, index) => (
-                <motion.div
-                  key={value.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-                  className="bg-card rounded-2xl p-6 border border-border/50 text-center"
-                >
-                  <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                    <value.icon className="w-7 h-7 text-primary" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2">
-                    {value.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm">
-                    {value.description}
-                  </p>
-                </motion.div>
-              ))}
+              <div>
+                {chapters.map((chapter, index) => (
+                  <motion.div
+                    key={chapter.num}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.08 }}
+                    className="about-chapter"
+                  >
+                    <div className="about-ch-num">{chapter.num}</div>
+                    <h3>{chapter.title}</h3>
+                    <p>{chapter.body}</p>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </section>
 
-          {/* CTA */}
-          <section className="section-container">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              className="bg-card rounded-3xl p-12 text-center border border-border/50"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Ready to Transform Your Store?
-              </h2>
-              <p className="text-muted-foreground text-lg mb-8 max-w-xl mx-auto">
-                Join thousands of Shopify merchants who are waiting to launch their mobile apps with AppDrop.
-              </p>
-              <Button onClick={() => setIsWaitlistOpen(true)} variant="hero" size="lg">
-                Join the Waitlist
-              </Button>
-            </motion.div>
+          <section className="about-values">
+            <div className="section-container about-values-grid">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="about-values-left"
+              >
+                <div className="about-kicker">Our values</div>
+                <h2>The principles behind every decision</h2>
+                <p>
+                  Four things we hold ourselves to, in the product and in every
+                  conversation with merchants.
+                </p>
+              </motion.div>
+
+              <div>
+                {values.map((value, index) => (
+                  <motion.div
+                    key={value.title}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.45, delay: index * 0.08 }}
+                    className="about-vrow"
+                  >
+                    <div className="about-vicon">
+                      <value.icon className="w-[22px] h-[22px]" strokeWidth={2} />
+                    </div>
+                    <div>
+                      <h3>{value.title}</h3>
+                      <p>{value.description}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="about-team" id="team">
+            <div className="about-team-grid">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              >
+                <div className="about-kicker">Who&apos;s behind AppDrop</div>
+                <h2>Built by people you can reach</h2>
+                <p className="about-team-lead">
+                  AppDrop is built and run by a small, hands-on team obsessed with
+                  mobile commerce. We&apos;re not a faceless tool — reach out anytime
+                  and you&apos;ll talk to the people who built it.
+                </p>
+                <p className="about-team-contact">
+                  Questions, demos, or partnerships:
+                  <br />
+                  <Link to="/contact">Get in touch via our contact page</Link>
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+              >
+                <div className="about-founder">
+                  <div className="about-founder-top">
+                    <img
+                      src={parthPhoto}
+                      alt="Parth Pahuja"
+                      className="about-founder-photo"
+                      width={96}
+                      height={96}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div>
+                      <h3>Parth Pahuja</h3>
+                      <div className="about-founder-role">Co-Founder &amp; CTO</div>
+                    </div>
+                  </div>
+                  <p className="about-founder-bio">
+                    Building tools that help Shopify merchants own their mobile channel.
+                  </p>
+                  <a
+                    href="https://www.linkedin.com/in/parth-pahuja/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="li-btn"
+                    aria-label="Parth Pahuja on LinkedIn"
+                  >
+                    <LinkedInIcon />
+                    <span className="li-btn-label">Connect on LinkedIn</span>
+                    <span className="li-arrow" aria-hidden="true">
+                      →
+                    </span>
+                  </a>
+                </div>
+              </motion.div>
+            </div>
+          </section>
+
+          <section className="about-cta">
+            <div className="section-container">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="about-cta-card"
+              >
+                <div className="about-cta-inner">
+                  <h2>Ready to Build Your App?</h2>
+                  <p>
+                    Book a Builder walkthrough and prepare your Shopify mobile app
+                    while our Shopify App Store listing is under review.
+                  </p>
+                  <button
+                    type="button"
+                    className="about-cta-btn"
+                    onClick={() => setIsWaitlistOpen(true)}
+                  >
+                    Book Demo
+                  </button>
+                </div>
+              </motion.div>
+            </div>
           </section>
         </main>
 
-        <Footer onOpenWaitlist={() => setIsWaitlistOpen(true)} />
-        
-        <WaitlistModal 
-          isOpen={isWaitlistOpen} 
-          onClose={() => setIsWaitlistOpen(false)} 
+        <Footer />
+
+        <WaitlistModal
+          isOpen={isWaitlistOpen}
+          onClose={() => setIsWaitlistOpen(false)}
         />
       </div>
     </>

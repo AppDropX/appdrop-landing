@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, CheckCircle, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -32,6 +32,29 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState<Partial<FormData>>({});
+
+  const handleClose = useCallback(() => {
+    onClose();
+    setTimeout(() => {
+      setFormData(initialFormData);
+      setIsSubmitted(false);
+      setErrors({});
+    }, 300);
+  }, [onClose]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    document.body.classList.add("scroll-locked");
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") handleClose();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.classList.remove("scroll-locked");
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [isOpen, handleClose]);
 
   const validateForm = () => {
     const newErrors: Partial<FormData> = {};
@@ -71,7 +94,7 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
 
       await fetch(SCRIPT_URL, {
         method: "POST",
-        body, // ❗ no headers → no CORS preflight
+        body,
       });
 
       setIsSubmitted(true);
@@ -80,15 +103,6 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
     } finally {
       setIsSubmitting(false);
     }
-  };
-
-  const handleClose = () => {
-    onClose();
-    setTimeout(() => {
-      setFormData(initialFormData);
-      setIsSubmitted(false);
-      setErrors({});
-    }, 300);
   };
 
   const handleInputChange = (field: keyof FormData, value: string) => {
@@ -102,40 +116,40 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Overlay */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={handleClose}
-            className="fixed inset-0 z-40 bg-foreground/20 backdrop-blur-sm"
+            className="fixed inset-0 z-[60] bg-foreground/30 backdrop-blur-sm"
           />
 
-          {/* Modal */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 z-[70] flex items-end sm:items-center justify-center p-0 sm:p-4 pointer-events-none"
           >
-            <div className="w-full max-w-lg">
-              <div className="relative bg-card rounded-3xl p-8 shadow-2xl border">
+            <div className="w-full sm:max-w-lg pointer-events-auto">
+              <div className="relative bg-card rounded-t-3xl sm:rounded-3xl p-5 sm:p-8 shadow-2xl border max-h-[90dvh] overflow-y-auto">
                 <button
+                  type="button"
                   onClick={handleClose}
-                  className="absolute top-4 right-4 p-2 rounded-full hover:bg-muted"
+                  className="absolute top-3 right-3 sm:top-4 sm:right-4 min-h-11 min-w-11 inline-flex items-center justify-center rounded-full hover:bg-muted"
+                  aria-label="Close"
                 >
                   <X className="w-5 h-5 text-muted-foreground" />
                 </button>
 
                 {!isSubmitted ? (
                   <>
-                    <div className="text-center mb-6">
-                      <h3 className="text-2xl font-bold mb-2">
-                        Join the Waitlist
+                    <div className="text-center mb-5 sm:mb-6 pr-8">
+                      <h3 className="text-xl sm:text-2xl font-bold mb-2">
+                        Book Demo
                       </h3>
-                      <p className="text-muted-foreground">
-                        Be the first to launch your Shopify store as a native app.
+                      <p className="text-sm sm:text-base text-muted-foreground">
+                        See AppDrop Builder in action and plan your Shopify mobile app workflow.
                       </p>
                     </div>
 
@@ -202,7 +216,9 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
 
                       <Button
                         type="submit"
-                        className="w-full"
+                        variant="hero"
+                        size="lg"
+                        className="w-full rounded-full"
                         disabled={isSubmitting}
                       >
                         {isSubmitting ? (
@@ -211,7 +227,7 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
                             Joining…
                           </>
                         ) : (
-                          "Join the Waitlist"
+                          "Book Demo"
                         )}
                       </Button>
                     </form>
@@ -219,7 +235,7 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
                 ) : (
                   <div className="text-center py-6">
                     <CheckCircle className="w-12 h-12 mx-auto text-accent mb-4" />
-                    <h3 className="text-2xl font-bold">
+                    <h3 className="text-xl sm:text-2xl font-bold">
                       You're on the list!
                     </h3>
                     <Button className="mt-6" onClick={handleClose}>

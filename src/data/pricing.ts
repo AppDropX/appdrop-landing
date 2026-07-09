@@ -1,6 +1,7 @@
 export const PRICING_FEATURES = [
   "Full AppDrop Builder Access",
-  "All Features Included",
+  "Live Preview and Theme Customization",
+  "Shopify Connection Coming Soon",
   "Cancel Anytime",
 ] as const;
 

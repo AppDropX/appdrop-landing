@@ -6,26 +6,26 @@ const HowItWorksSection = () => {
     {
       icon: Link2,
       step: "01",
-      title: "Connect Your Shopify Store",
-      description: "Link your Shopify store in seconds. We automatically sync your products, collections, and inventory in real-time.",
+      title: "Start in the Builder",
+      description: "Open AppDrop Builder and map the mobile experience you want customers to see before Shopify connection is live.",
     },
     {
       icon: Palette,
       step: "02",
       title: "Customize With Drag & Drop",
-      description: "Use our visual editor to design your app. Choose layouts, colors, and components without writing a single line of code.",
+      description: "Choose layouts, colors, product sections, and components without writing a single line of code.",
     },
     {
       icon: Rocket,
       step: "03",
-      title: "Publish to iOS & Android",
-      description: "Submit to App Store and Google Play with one click. We handle the technical requirements and app store guidelines.",
+      title: "Connect Shopify",
+      description: "Shopify connection is coming soon once AppDrop completes Shopify App Store review.",
     },
     {
       icon: Bell,
       step: "04",
-      title: "Engage & Boost Sales",
-      description: "Send push notifications, track analytics, and optimize conversions. Turn one-time buyers into repeat customers.",
+      title: "Publish and Grow",
+      description: "Prepare push notifications, analytics, and launch workflows so your app is ready when publishing opens.",
     },
   ];
 
@@ -43,11 +43,11 @@ const HowItWorksSection = () => {
             How It Works
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-            From Shopify to App Store in{" "}
-            <span className="gradient-text">4 Simple Steps</span>
+            Build First, Connect Shopify,{" "}
+            <span className="gradient-text">Then Publish</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Launch your mobile app without developers, designers, or months of waiting. AppDrop makes it effortless.
+            AppDrop starts with the Builder, then brings Shopify connection and publishing into one guided workflow.
           </p>
         </motion.div>
 

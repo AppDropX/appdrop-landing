@@ -92,24 +92,24 @@ const Contact = () => {
         <link rel="canonical" href="https://appdrop.io/contact" />
       </Helmet>
 
-      <div className="min-h-screen bg-background">
+      <div className="min-h-dvh bg-background">
         <Navbar onOpenWaitlist={() => setIsWaitlistOpen(true)} />
         
-        <main className="pt-32 pb-20">
+        <main className="pt-[var(--site-header-offset)] pb-20">
           {/* Hero */}
-          <section className="section-container text-center mb-16">
+          <section className="section-container text-center mb-12 sm:mb-16">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
+              <span className="v3-eyebrow text-primary before:bg-primary mx-auto mb-6">
                 Contact
               </span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
-                Get in <span className="text-gradient">Touch</span>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
+                Get in <span className="gradient-text">Touch</span>
               </h1>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-base sm:text-xl text-muted-foreground max-w-2xl mx-auto px-1">
                 Have questions? We&apos;d love to hear from you. Send us a message and
                 we&apos;ll respond as soon as possible.
               </p>
@@ -117,15 +117,15 @@ const Contact = () => {
           </section>
 
           {/* Contact Info Cards */}
-          <section className="section-container mb-16">
-            <div className="flex flex-wrap justify-center gap-6">
+          <section className="section-container mb-12 sm:mb-16">
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
               {contactInfo.map((info, index) => (
                 <motion.div
                   key={info.title}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-card rounded-2xl p-6 border border-border/50 text-center flex flex-col items-center w-full sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)] max-w-[427px] h-[226px]"
+                  className="bg-card rounded-2xl p-5 sm:p-6 border border-border/50 text-center flex flex-col items-center w-full sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)] max-w-[427px] min-h-[180px] sm:min-h-[200px]"
                 >
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 shrink-0">
                     <info.icon className="w-6 h-6 text-primary" />
@@ -134,14 +134,14 @@ const Contact = () => {
                   {info.href ? (
                     <a
                       href={info.href}
-                      className="text-foreground font-medium hover:text-primary transition-colors shrink-0"
+                      className="text-foreground font-medium hover:text-primary transition-colors shrink-0 break-all"
                     >
                       {info.description}
                     </a>
                   ) : (
                     <p className="text-foreground font-medium shrink-0">{info.description}</p>
                   )}
-                  <p className="text-sm text-muted-foreground leading-snug mt-1 flex-1 flex items-start justify-center">
+                  <p className="text-sm text-muted-foreground leading-snug mt-1 flex-1 flex items-start justify-center break-words px-1">
                     {info.detail}
                   </p>
                 </motion.div>
@@ -150,15 +150,15 @@ const Contact = () => {
           </section>
 
           {/* Contact Form */}
-          <section className="section-container">
+          <section id="message" className="section-container scroll-mt-[var(--site-header-offset)]">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
               className="max-w-2xl mx-auto"
             >
-              <div className="bg-card rounded-3xl p-8 md:p-12 border border-border/50">
-                <h2 className="text-2xl font-bold text-foreground mb-6 text-center">
+              <div className="bg-card rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-12 border border-border/50">
+                <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-6 text-center">
                   Send us a Message
                 </h2>
                 
@@ -234,7 +234,7 @@ const Contact = () => {
           </section>
         </main>
 
-        <Footer onOpenWaitlist={() => setIsWaitlistOpen(true)} />
+        <Footer />
         
         <WaitlistModal 
           isOpen={isWaitlistOpen} 

@@ -1,91 +1,88 @@
 import { motion } from "framer-motion";
-import { 
-  Smartphone, 
-  RefreshCw, 
-  Bell, 
-  WifiOff, 
-  Zap, 
-  Code2 
+import {
+  BarChart3,
+  Bell,
+  Eye,
+  Palette,
+  Puzzle,
+  RefreshCw,
+  type LucideIcon,
 } from "lucide-react";
+import SectionHeader from "@/components/shared/SectionHeader";
 
-const FeaturesSection = () => {
-  const features = [
-    {
-      icon: Smartphone,
-      title: "Native iOS & Android Apps",
-      description: "True native performance that feels fast and fluid. No web views, no compromises.",
-    },
-    {
-      icon: RefreshCw,
-      title: "Real-time Shopify Sync",
-      description: "Products, inventory, and orders stay in sync automatically. Changes reflect instantly.",
-    },
-    {
-      icon: Bell,
-      title: "Push Notifications",
-      description: "Re-engage customers with personalized push notifications. Boost retention and sales.",
-    },
-    {
-      icon: WifiOff,
-      title: "Offline Browsing",
-      description: "Customers can browse your store even without internet. Perfect for on-the-go shopping.",
-    },
-    {
-      icon: Zap,
-      title: "Lightning Fast Performance",
-      description: "60 FPS animations, instant page loads, and smooth scrolling your customers will love.",
-    },
-    {
-      icon: Code2,
-      title: "No Coding Required",
-      description: "Visual drag-and-drop builder. If you can use Shopify, you can use AppDrop.",
-    },
-  ];
+const features: { icon: LucideIcon; title: string; description: string; iconBg: string }[] = [
+  {
+    icon: Puzzle,
+    title: "Drag & Drop Builder",
+    description:
+      "Assemble your app from ready-made blocks for banners, product grids, collections, and campaigns without touching code.",
+    iconBg: "bg-primary/15",
+  },
+  {
+    icon: Eye,
+    title: "Live Preview",
+    description:
+      "Preview the app experience as you design it, so layout, content, and merchandising decisions are visible before publishing.",
+    iconBg: "bg-teal/10",
+  },
+  {
+    icon: Palette,
+    title: "Theme Customization",
+    description:
+      "Control colors, typography, navigation, product cards, and brand details from a focused visual settings panel.",
+    iconBg: "bg-amber-100",
+  },
+  {
+    icon: RefreshCw,
+    title: "Real-time Changes",
+    description:
+      "Make edits in the Builder and see them reflected immediately in preview, reducing guesswork before launch.",
+    iconBg: "bg-violet-100",
+  },
+  {
+    icon: Bell,
+    title: "Push Notifications",
+    description:
+      "Plan rich push campaigns for product drops, cart recovery, and customer re-engagement from the same mobile commerce platform.",
+    iconBg: "bg-teal/10",
+  },
+  {
+    icon: BarChart3,
+    title: "Analytics",
+    description:
+      "Measure app engagement, campaigns, and commerce performance once your mobile app is connected and live.",
+    iconBg: "bg-primary/15",
+  },
+];
 
-  return (
-    <section id="features" className="py-24 lg:py-32">
-      <div className="section-container">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
-          <span className="inline-block px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-semibold mb-4">
-            Features
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-            Everything You Need to{" "}
-            <span className="gradient-text">Go Mobile</span>
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            AppDrop gives you all the tools to create a world-class mobile shopping experience.
-          </p>
-        </motion.div>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {features.map((feature, index) => (
-            <motion.div
-              key={feature.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="feature-card group"
-            >
-              <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
-                <feature.icon className="w-7 h-7 text-primary" />
-              </div>
-
-              <h3 className="text-xl font-bold mb-3 text-foreground">{feature.title}</h3>
-              <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
-            </motion.div>
-          ))}
-        </div>
+const FeaturesSection = () => (
+  <section id="features" className="scroll-mt-[var(--site-header-offset)] py-14 sm:py-20 lg:py-24">
+    <div className="section-container">
+      <SectionHeader
+        eyebrow="Everything built in"
+        title="A complete Builder for mobile commerce"
+        subtitle="Design the app first, connect Shopify when the listing is live, then publish from a workflow built for merchants."
+      />
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+        {features.map((feature, index) => (
+          <motion.div
+            key={feature.title}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index * 0.08 }}
+            className="v3-feature-card group"
+          >
+            <div className={`v3-feature-icon ${feature.iconBg} group-hover:scale-105 transition-transform`}>
+              <feature.icon className="w-5 h-5 text-primary" />
+            </div>
+            <h3 className="text-xl font-display font-bold mb-2">{feature.title}</h3>
+            <p className="text-muted-foreground text-[15px] leading-relaxed">{feature.description}</p>
+          </motion.div>
+        ))}
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default FeaturesSection;
