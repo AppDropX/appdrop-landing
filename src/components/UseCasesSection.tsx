@@ -24,7 +24,7 @@ const UseCasesSection = () => {
     {
       icon: TrendingUp,
       title: "High-Volume Merchants",
-      description: "Established stores scale their mobile presence to handle thousands of daily orders with native performance.",
+      description: "Established stores can plan a more scalable mobile presence with structured app screens, campaigns, and analytics.",
       color: "from-emerald-500 to-teal-500",
     },
   ];
@@ -47,7 +47,7 @@ const UseCasesSection = () => {
             <span className="gradient-text">Every Shopify Store</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            From emerging DTC brands to established enterprises, AppDrop powers mobile commerce for stores of all sizes.
+            From emerging DTC brands to established merchants, AppDrop helps teams design mobile commerce experiences before they publish.
           </p>
         </motion.div>
 

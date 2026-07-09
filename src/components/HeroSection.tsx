@@ -1,69 +1,106 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Play } from "lucide-react";
+import {
+  ArrowDown,
+  Bell,
+  LayoutGrid,
+  Rocket,
+  ShoppingCart,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import mobileScreenImage from "@/assets/mobile-screen.png";
+import { APPDROP_BUILDER_URL } from "@/lib/urls";
 
-interface HeroSectionProps {
-  onOpenWaitlist: () => void;
-}
+const heroStats = [
+  { value: "No-code", label: "visual app builder" },
+  { value: "Live", label: "mobile preview as you edit" },
+  { value: "Soon", label: "Shopify App Store listing" },
+];
 
-const HeroSection = ({ onOpenWaitlist }: HeroSectionProps) => {
+const floatingChips = [
+  {
+    title: "Banner Block",
+    subtitle: "Summer drop live!",
+    icon: LayoutGrid,
+    iconClass: "hero-chip-icon--coral",
+    className: "hero-chip--banner",
+    delay: 0,
+  },
+  {
+    title: "Push Notification",
+    subtitle: "Sale alert sent!",
+    icon: Bell,
+    iconClass: "hero-chip-icon--teal",
+    className: "hero-chip--push",
+    delay: 1.1,
+  },
+  {
+    title: "Cart Updated",
+    subtitle: "3 items ready",
+    icon: ShoppingCart,
+    iconClass: "hero-chip-icon--violet",
+    className: "hero-chip--cart",
+    delay: 2.1,
+  },
+];
+
+const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[128px] opacity-60" />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-accent/20 rounded-full blur-[96px] opacity-50" />
+    <section className="hero-section">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="hero-blob hero-blob-one" />
+        <div className="hero-blob hero-blob-two" />
       </div>
 
       <div className="section-container relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Content */}
-          <div className="text-center lg:text-left">
-            <motion.div
+        <div className="hero-grid">
+          <div className="hero-content">
+            <motion.span
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6"
+              className="v3-eyebrow max-w-[20rem] sm:max-w-none mx-auto lg:mx-0"
             >
-              <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-              <span className="text-sm font-medium text-primary">Now accepting early access signups</span>
-            </motion.div>
+              <span className="sm:hidden">No-code · Shopify under review</span>
+              <span className="hidden sm:inline">No-code builder · Shopify listing under review</span>
+            </motion.span>
 
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-tight mb-6"
+              className="text-[1.75rem] sm:text-5xl lg:text-6xl xl:text-[4.5rem] font-display font-extrabold leading-[1.12] sm:leading-[1.04] tracking-tight mt-5 mb-5 sm:mb-6"
             >
-              Turn Your Shopify Store Into a{" "}
-              <span className="gradient-text">Native Mobile App</span>
-              {" "}— Instantly.
+              Build your Shopify{" "}
+              <span className="text-primary">mobile app</span> visually.
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-xl mx-auto lg:mx-0"
+              className="text-sm sm:text-xl text-muted-foreground mb-7 sm:mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed"
             >
-              AppDrop is a drag-and-drop app builder that syncs with Shopify to deliver native performance, push notifications, and offline-ready experiences.
+              AppDrop gives Shopify merchants a no-code Builder with live preview,
+              brand controls, and publish-ready mobile apps. Shopify integration is
+              coming soon as our App Store listing completes review.
             </motion.p>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+              className="flex flex-col sm:flex-row gap-3.5 justify-center lg:justify-start"
             >
-              <Button onClick={onOpenWaitlist} variant="hero" size="lg">
-                Join the Waitlist
-                <ArrowRight className="w-5 h-5" />
+              <Button variant="hero" size="lg" className="rounded-full" asChild>
+                <a href={APPDROP_BUILDER_URL} target="_blank" rel="noopener noreferrer">
+                  <Rocket className="w-5 h-5" />
+                  Launch Builder
+                </a>
               </Button>
-              <Button variant="hero-outline" size="lg" asChild>
-                <a href="#how-it-works">
-                  <Play className="w-5 h-5" />
-                  See How It Works
+              <Button variant="hero-outline" size="lg" className="rounded-full" asChild>
+                <a href="#builder">
+                  See the Builder
+                  <ArrowDown className="w-4 h-4" />
                 </a>
               </Button>
             </motion.div>
@@ -71,78 +108,52 @@ const HeroSection = ({ onOpenWaitlist }: HeroSectionProps) => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="mt-10 flex items-center gap-6 justify-center lg:justify-start"
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="mt-8 sm:mt-9 grid grid-cols-3 gap-3 sm:flex sm:flex-wrap sm:gap-8 justify-center lg:justify-start"
             >
-              <div className="flex -space-x-3">
-                {[1, 2, 3, 4].map((i) => (
-                  <div
-                    key={i}
-                    className="w-10 h-10 rounded-full bg-muted border-2 border-card flex items-center justify-center text-xs font-semibold text-muted-foreground"
-                  >
-                    {String.fromCharCode(64 + i)}
-                  </div>
-                ))}
-              </div>
-              <div className="text-left">
-                <p className="text-sm font-semibold text-foreground">500+ merchants waiting</p>
-                <p className="text-sm text-muted-foreground">Join the waitlist today</p>
-              </div>
+              {heroStats.map((stat) => (
+                <div key={stat.label} className="text-center lg:text-left">
+                  <p className="font-display text-xl sm:text-4xl font-extrabold text-primary leading-none">
+                    {stat.value}
+                  </p>
+                  <p className="text-[11px] sm:text-sm text-muted-foreground mt-1.5 sm:mt-2 max-w-[12ch] sm:max-w-[15ch] mx-auto lg:mx-0 leading-snug">
+                    {stat.label}
+                  </p>
+                </div>
+              ))}
             </motion.div>
           </div>
 
-          {/* Phone Mockup - Professional & Consistent */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="relative flex justify-center items-center"
+            className="hero-visual"
           >
-            <div className="relative">
-              {/* Main Phone */}
-              <div className="relative z-20">
-                <img
-                  src={mobileScreenImage}
-                  alt="AppDrop mobile app preview"
-                  className="w-64 sm:w-72 md:w-80 lg:w-96 h-auto object-contain bg-transparent"
-                />
+            {floatingChips.map((chip) => (
+              <div
+                key={chip.title}
+                className={`hero-chip-wrap ${chip.className}`}
+                style={{ animationDelay: `${chip.delay}s` }}
+              >
+                <div className="hero-chip">
+                  <span className={`hero-chip-icon ${chip.iconClass}`}>
+                    <chip.icon className="w-[18px] h-[18px]" strokeWidth={2} />
+                  </span>
+                  <span className="hero-chip-copy">
+                    <span className="hero-chip-title">{chip.title}</span>
+                    <span className="hero-chip-subtitle">{chip.subtitle}</span>
+                  </span>
+                </div>
               </div>
+            ))}
 
-              {/* Floating Badge - Push Notification */}
-              <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -right-2 sm:-right-6 lg:-right-12 top-16 sm:top-20 z-30"
-              >
-                <div className="glass px-3 sm:px-4 py-2 sm:py-3 rounded-xl sm:rounded-2xl flex items-center gap-2 sm:gap-3 shadow-lg">
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary/20 flex items-center justify-center">
-                    <svg className="w-4 h-4 sm:w-5 sm:h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="text-xs sm:text-sm font-semibold text-foreground">Push Notification</p>
-                    <p className="text-[10px] sm:text-xs text-muted-foreground">Sale alert sent!</p>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Floating Badge - Synced */}
-              <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                className="absolute -left-2 sm:-left-6 lg:-left-12 bottom-24 sm:bottom-32 z-30"
-              >
-                <div className="glass px-3 sm:px-4 py-2 sm:py-3 rounded-xl sm:rounded-2xl shadow-lg">
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                    <p className="text-xs sm:text-sm font-medium text-foreground">Synced with Shopify</p>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Decorative Glow */}
-              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-48 h-24 bg-primary/30 rounded-full blur-3xl -z-10" />
+            <div className="relative z-20 transition-transform duration-300 hover:-translate-y-1.5">
+              <img
+                src={mobileScreenImage}
+                alt="AppDrop mobile app preview"
+                className="w-44 sm:w-60 md:w-72 lg:w-80 xl:w-[22rem] max-w-[min(70vw,22rem)] h-auto object-contain drop-shadow-2xl"
+              />
             </div>
           </motion.div>
         </div>

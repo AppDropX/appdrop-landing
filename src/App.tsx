@@ -11,6 +11,8 @@ import Contact from "./pages/Contact";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
+import ScrollProgressBar from "./components/ScrollProgressBar";
+import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +23,8 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <ScrollToTop />
+          <ScrollProgressBar />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/features" element={<Features />} />

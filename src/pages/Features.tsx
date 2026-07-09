@@ -22,13 +22,13 @@ import WaitlistModal from "@/components/WaitlistModal";
 const features = [
   {
     icon: Smartphone,
-    title: "Native iOS & Android Apps",
-    description: "True native performance on both platforms. No webviews, no compromises. Your app feels just like any top-tier mobile app.",
+    title: "Publish-Ready Mobile Apps",
+    description: "Design a polished mobile app experience for your Shopify brand from one visual Builder workflow.",
   },
   {
     icon: RefreshCw,
-    title: "Real-Time Shopify Sync",
-    description: "Products, inventory, orders, and customers sync automatically. Changes in Shopify reflect instantly in your app.",
+    title: "Shopify Connection Coming Soon",
+    description: "AppDrop is currently under Shopify review. Build your app now and prepare to connect products, collections, and inventory once the listing is live.",
   },
   {
     icon: Bell,
@@ -37,13 +37,13 @@ const features = [
   },
   {
     icon: Wifi,
-    title: "Offline Browsing",
-    description: "Your app works even without internet. Customers can browse products and their cart syncs when they're back online.",
+    title: "Live Preview",
+    description: "See layout, content, and product presentation update in the Builder as you make design decisions.",
   },
   {
     icon: Zap,
-    title: "Lightning Fast Performance",
-    description: "Optimized for speed with lazy loading, image compression, and smart caching. Load times under 2 seconds.",
+    title: "Fast Mobile Experience",
+    description: "Create a mobile-first shopping experience designed around focused screens, responsive media, and native-feeling interactions.",
   },
   {
     icon: Code2,
@@ -62,8 +62,8 @@ const features = [
   },
   {
     icon: ShoppingCart,
-    title: "Native Checkout",
-    description: "Seamless checkout experience with Apple Pay, Google Pay, and all major payment methods supported.",
+    title: "Commerce Blocks",
+    description: "Build product, collection, banner, and merchandising sections that turn your catalog into a mobile app experience.",
   },
   {
     icon: Globe,
@@ -72,13 +72,13 @@ const features = [
   },
   {
     icon: Shield,
-    title: "Enterprise Security",
-    description: "Bank-grade encryption, GDPR compliance, and SOC 2 certification to keep your data safe.",
+    title: "Review-Ready Workflow",
+    description: "Work from a structured publishing path designed to support Shopify review, mobile app preparation, and merchant onboarding.",
   },
   {
     icon: Headphones,
-    title: "24/7 Support",
-    description: "Dedicated support team available around the clock. Get help whenever you need it.",
+    title: "Guided Support",
+    description: "Book a demo with the AppDrop team for Builder walkthroughs, launch planning, and Shopify connection readiness.",
   },
 ];
 
@@ -88,20 +88,20 @@ const Features = () => {
   return (
     <>
       <Helmet>
-        <title>Features - AppDrop | Native Mobile App Builder for Shopify</title>
+        <title>Features - AppDrop | Visual Mobile App Builder for Shopify</title>
         <meta 
           name="description" 
-          content="Explore AppDrop's powerful features: native iOS & Android apps, real-time Shopify sync, push notifications, offline browsing, and more. No coding required." 
+          content="Explore AppDrop Builder features: drag-and-drop mobile app design, live preview, theme customization, push notifications, analytics, and Shopify connection coming soon." 
         />
         <link rel="canonical" href="https://appdrop.io/features" />
       </Helmet>
 
-      <div className="min-h-screen bg-background">
+      <div className="min-h-dvh bg-background">
         <Navbar onOpenWaitlist={() => setIsWaitlistOpen(true)} />
         
-        <main className="pt-32 pb-20">
+        <main className="pt-[var(--site-header-offset)] pb-20">
           {/* Hero */}
-          <section className="section-container text-center mb-20">
+          <section className="section-container text-center mb-12 sm:mb-20">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -110,34 +110,34 @@ const Features = () => {
               <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
                 Features
               </span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
                 Everything You Need to{" "}
-                <span className="text-gradient">Launch Your App</span>
+                <span className="gradient-text">Build Your App</span>
               </h1>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Powerful features designed to help Shopify merchants create stunning native mobile apps that drive sales and engagement.
+              <p className="text-base sm:text-xl text-muted-foreground max-w-2xl mx-auto">
+                Builder-first features for Shopify merchants who want to design a polished mobile app now and connect Shopify when AppDrop's listing is live.
               </p>
             </motion.div>
           </section>
 
           {/* Features Grid */}
           <section className="section-container">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
               {features.map((feature, index) => (
                 <motion.div
                   key={feature.title}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.05 }}
-                  className="bg-card rounded-2xl p-8 border border-border/50 hover:border-primary/30 hover:shadow-lg transition-all duration-300 group"
+                  className="bg-card rounded-2xl p-5 sm:p-6 md:p-8 border border-border/50 hover:border-primary/30 hover:shadow-lg transition-all duration-300 group"
                 >
-                  <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
-                    <feature.icon className="w-7 h-7 text-primary" />
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-5 sm:mb-6 group-hover:bg-primary/20 transition-colors">
+                    <feature.icon className="w-6 h-6 sm:w-7 sm:h-7 text-primary" />
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-3">
+                  <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-3">
                     {feature.title}
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                     {feature.description}
                   </p>
                 </motion.div>
@@ -146,7 +146,7 @@ const Features = () => {
           </section>
         </main>
 
-        <Footer onOpenWaitlist={() => setIsWaitlistOpen(true)} />
+        <Footer />
         
         <WaitlistModal 
           isOpen={isWaitlistOpen} 

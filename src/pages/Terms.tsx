@@ -19,10 +19,10 @@ const Terms = () => {
         <link rel="canonical" href="https://appdrop.io/terms" />
       </Helmet>
 
-      <div className="min-h-screen bg-background">
+      <div className="min-h-dvh bg-background">
         <Navbar onOpenWaitlist={() => setIsWaitlistOpen(true)} />
 
-        <main className="pt-32 pb-20">
+        <main className="pt-[var(--site-header-offset)] pb-20">
           <section className="section-container">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -30,14 +30,14 @@ const Terms = () => {
               transition={{ duration: 0.5 }}
               className="max-w-3xl mx-auto"
             >
-              <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
                 Terms of Use
               </h1>
               <p className="text-muted-foreground mb-8">
                 Effective Date: June 2026 · Last Updated: June 2026
               </p>
 
-              <div className="prose prose-lg max-w-none">
+              <div className="prose prose-base sm:prose-lg max-w-none break-words">
                 <div className="space-y-8 text-muted-foreground">
                   <section>
                     <p className="mb-4">
@@ -797,7 +797,7 @@ const Terms = () => {
           </section>
         </main>
 
-        <Footer onOpenWaitlist={() => setIsWaitlistOpen(true)} />
+        <Footer />
 
         <WaitlistModal
           isOpen={isWaitlistOpen}

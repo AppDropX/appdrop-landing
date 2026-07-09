@@ -44,11 +44,11 @@ const WaitlistCTASection = () => {
             {!isSubmitted ? (
               <>
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-                  Be the First to{" "}
-                  <span className="gradient-text">Launch Your App</span>
+                  Be Ready to{" "}
+                  <span className="gradient-text">Create Your App</span>
                 </h2>
                 <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto">
-                  Join 500+ Shopify merchants on the waitlist. Get early access, exclusive pricing, and priority support when we launch.
+                  Book a guided walkthrough of AppDrop Builder, shape your mobile app strategy, and prepare for Shopify connection once our listing is live.
                 </p>
 
                 <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
@@ -71,7 +71,7 @@ const WaitlistCTASection = () => {
                       <Loader2 className="w-5 h-5 animate-spin" />
                     ) : (
                       <>
-                        Join Waitlist
+                        Book Demo
                         <ArrowRight className="w-5 h-5" />
                       </>
                     )}
@@ -93,7 +93,7 @@ const WaitlistCTASection = () => {
                 </div>
                 <h3 className="text-3xl font-bold mb-4 text-foreground">You're on the list!</h3>
                 <p className="text-lg text-muted-foreground max-w-md mx-auto">
-                  We'll be in touch soon with exclusive updates and early access to AppDrop.
+                  We'll be in touch soon with Builder access details and demo next steps.
                 </p>
               </motion.div>
             )}
