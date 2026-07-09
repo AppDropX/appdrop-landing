@@ -16,7 +16,7 @@ const Privacy = () => {
           name="description"
           content="AppDrop's privacy policy explains how DoMySale Private Limited collects, uses, stores, and protects your personal data."
         />
-        <link rel="canonical" href="https://appdrop.io/privacy" />
+        <link rel="canonical" href="https://appdrop.co/privacy" />
       </Helmet>
 
       <div className="min-h-dvh bg-background">

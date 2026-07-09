@@ -93,7 +93,7 @@ const Features = () => {
           name="description" 
           content="Explore AppDrop Builder features: drag-and-drop mobile app design, live preview, theme customization, push notifications, analytics, and Shopify connection coming soon." 
         />
-        <link rel="canonical" href="https://appdrop.io/features" />
+        <link rel="canonical" href="https://appdrop.co/features" />
       </Helmet>
 
       <div className="min-h-dvh bg-background">

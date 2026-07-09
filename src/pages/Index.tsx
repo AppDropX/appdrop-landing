@@ -30,20 +30,29 @@ const Index = () => {
           name="keywords"
           content="Shopify mobile app builder, no-code app builder, ecommerce app builder, mobile commerce, push notifications, live preview, app builder for Shopify"
         />
-        <link rel="canonical" href="https://appdrop.io" />
+        <link rel="canonical" href="https://appdrop.co" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="AppDrop - Visual Shopify Mobile App Builder" />
         <meta
           property="og:description"
           content="Design a publish-ready mobile app for your Shopify store with a no-code Builder, live preview, and theme controls."
         />
-        <meta property="og:url" content="https://appdrop.io" />
+        <meta property="og:url" content="https://appdrop.co" />
+        <meta property="og:site_name" content="AppDrop" />
+        <meta property="og:image" content="https://appdrop.co/og-image.png" />
+        <meta property="og:image:secure_url" content="https://appdrop.co/og-image.png" />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="1024" />
+        <meta property="og:image:height" content="1024" />
+        <meta property="og:image:alt" content="AppDrop logo" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="AppDrop - Visual Shopify Mobile App Builder" />
         <meta
           name="twitter:description"
           content="Build your Shopify mobile app visually with AppDrop Builder."
         />
+        <meta name="twitter:image" content="https://appdrop.co/og-image.png" />
+        <meta name="twitter:image:alt" content="AppDrop logo" />
       </Helmet>
 
       <div className="min-h-dvh bg-background w-full">

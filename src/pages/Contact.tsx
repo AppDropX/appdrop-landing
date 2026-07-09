@@ -89,7 +89,7 @@ const Contact = () => {
           name="description" 
           content="Have questions about AppDrop? Contact our team. We're here to help you launch your Shopify mobile app." 
         />
-        <link rel="canonical" href="https://appdrop.io/contact" />
+        <link rel="canonical" href="https://appdrop.co/contact" />
       </Helmet>
 
       <div className="min-h-dvh bg-background">

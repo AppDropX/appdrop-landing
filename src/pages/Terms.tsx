@@ -16,7 +16,7 @@ const Terms = () => {
           name="description"
           content="AppDrop Terms of Use — the legally binding agreement between you and DoMySale Private Limited for using the AppDrop Platform."
         />
-        <link rel="canonical" href="https://appdrop.io/terms" />
+        <link rel="canonical" href="https://appdrop.co/terms" />
       </Helmet>
 
       <div className="min-h-dvh bg-background">
