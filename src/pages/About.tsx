@@ -79,7 +79,7 @@ const About = () => {
           name="description"
           content="AppDrop is a no-code mobile app builder for Shopify stores. Meet the team building mobile commerce for every merchant."
         />
-        <link rel="canonical" href="https://appdrop.io/about" />
+        <link rel="canonical" href="https://appdrop.co/about" />
       </Helmet>
 
       <div className="min-h-dvh bg-background w-full">

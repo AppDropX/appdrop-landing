@@ -71,7 +71,7 @@ const DashboardFlowSection = () => {
                 </div>
                 <div className="flex-1 flex justify-center">
                   <div className="px-6 py-1 bg-background rounded-lg text-xs text-muted-foreground">
-                    dashboard.appdrop.io
+                    dashboard.appdrop.co
                   </div>
                 </div>
               </div>

@@ -1,6 +1,6 @@
 # AppDrop Landing Page
 
-Marketing site for [AppDrop](https://appdrop.io) — a no-code mobile app builder for Shopify stores.
+Marketing site for [AppDrop](https://appdrop.co) — a no-code mobile app builder for Shopify stores.
 
 ## Tech stack
 
