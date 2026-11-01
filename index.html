@@ -3,27 +3,62 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AppDrop - Turn Your Shopify Store Into a Native Mobile App</title>
-    <meta name="description" content="AppDrop is a no-code mobile app builder for Shopify. Create native iOS & Android apps with drag-and-drop simplicity, push notifications, and real-time sync." />
+    <title>AppDrop - Visual Shopify Mobile App Builder</title>
     <meta name="author" content="AppDrop" />
-    <meta name="keywords" content="Shopify mobile app, Shopify app builder, native app builder, ecommerce app, mobile commerce, no-code app" />
 
-    <meta property="og:title" content="AppDrop - Shopify Mobile App Builder" />
-    <meta property="og:description" content="Turn your Shopify store into a beautiful native mobile app. No coding required." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://appdrop.io/og-image.png" />
+    <!--
+      Fallback metadata for crawlers and link-preview bots that don't run JS.
+      data-rh marks these as react-helmet-managed, so each page's <Seo>
+      replaces them instead of duplicating them. Canonical link and og:url
+      are deliberately not set here: each route's <Seo> sets its own.
+      Host is SITE_URL (src/lib/site.ts) = https://www.appdrop.co.
+    -->
+    <meta data-rh="true" name="description" content="Design a native mobile app for your Shopify store with AppDrop's no-code Builder: live preview, theme controls and a publish-ready app workflow." />
+    <meta data-rh="true" property="og:type" content="website" />
+    <meta data-rh="true" property="og:site_name" content="AppDrop" />
+    <meta data-rh="true" property="og:title" content="AppDrop - Visual Shopify Mobile App Builder" />
+    <meta data-rh="true" property="og:description" content="Design a native mobile app for your Shopify store with AppDrop's no-code Builder: live preview, theme controls and a publish-ready app workflow." />
+    <meta data-rh="true" property="og:image" content="https://www.appdrop.co/og-image.png" />
+    <meta data-rh="true" property="og:image:width" content="1200" />
+    <meta data-rh="true" property="og:image:height" content="630" />
+    <meta data-rh="true" name="twitter:card" content="summary_large_image" />
+    <meta data-rh="true" name="twitter:site" content="@appdropco" />
+    <meta data-rh="true" name="twitter:title" content="AppDrop - Visual Shopify Mobile App Builder" />
+    <meta data-rh="true" name="twitter:description" content="Design a native mobile app for your Shopify store with AppDrop's no-code Builder: live preview, theme controls and a publish-ready app workflow." />
+    <meta data-rh="true" name="twitter:image" content="https://www.appdrop.co/og-image.png" />
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@AppDrop" />
-    <meta name="twitter:title" content="AppDrop - Shopify Mobile App Builder" />
-    <meta name="twitter:description" content="Create native iOS & Android apps for your Shopify store instantly." />
-    <meta name="twitter:image" content="https://appdrop.io/og-image.png" />
-    
-    <link rel="canonical" href="https://appdrop.io" />
-    
-    <!-- Preconnect to Google Fonts -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Google Fonts: loaded from HTML (not a CSS @import) so it isn't render-blocked behind the app CSS. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" />
+
+    <!-- Site-wide structured data (static so it works without JS). sameAs lists only confirmed accounts. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://www.appdrop.co/#organization",
+            "name": "AppDrop",
+            "url": "https://www.appdrop.co/",
+            "logo": "https://www.appdrop.co/apple-touch-icon.png",
+            "email": "hello@appdrop.co",
+            "sameAs": ["https://x.com/appdropco"]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://www.appdrop.co/#website",
+            "name": "AppDrop",
+            "url": "https://www.appdrop.co/",
+            "publisher": { "@id": "https://www.appdrop.co/#organization" }
+          }
+        ]
+      }
+    </script>
   </head>
 
   <body>

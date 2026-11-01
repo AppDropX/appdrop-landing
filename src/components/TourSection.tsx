@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
-import tourAppStyling from "@/assets/tour-app-styling.png";
-import tourProductBlock from "@/assets/tour-product-block.png";
+import tourAppStyling from "@/assets/tour-app-styling.webp";
+import tourProductBlock from "@/assets/tour-product-block.webp";
 import SectionHeader from "@/components/shared/SectionHeader";
 import MacWindow from "@/components/shared/MacWindow";
 import ProductScreenshot from "@/components/shared/ProductScreenshot";

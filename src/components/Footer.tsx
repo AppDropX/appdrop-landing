@@ -1,6 +1,6 @@
 import { CircleCheck } from "lucide-react";
 import { Link } from "react-router-dom";
-import appdropLogoIcon from "@/assets/appdrop-logo-icon.png";
+import appdropLogoIcon from "@/assets/appdrop-logo-icon-96.webp";
 
 const footerLinks = {
   Product: [
@@ -78,6 +78,10 @@ const Footer = () => {
                 <img
                   src={appdropLogoIcon}
                   alt="AppDrop icon"
+                  width={96}
+                  height={96}
+                  loading="lazy"
+                  decoding="async"
                 />
               </span>
               AppDrop

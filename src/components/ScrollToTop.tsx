@@ -11,9 +11,16 @@ const ScrollToTop = () => {
     }
 
     const id = hash.slice(1);
-    requestAnimationFrame(() => {
+    // Routes are lazy-loaded, so the target may not be mounted yet on the
+    // first frame. Retry each frame for up to ~2s before giving up.
+    let frame = 0;
+    let rafId = 0;
+    const tryScroll = () => {
       const el = document.getElementById(id);
-      if (!el) return;
+      if (!el) {
+        if (++frame < 120) rafId = requestAnimationFrame(tryScroll);
+        return;
+      }
 
       const raw = getComputedStyle(document.documentElement)
         .getPropertyValue("--site-header-offset")
@@ -25,7 +32,9 @@ const ScrollToTop = () => {
         (Number.isFinite(offset) ? offset : 113) -
         8;
       window.scrollTo({ top, behavior: "smooth" });
-    });
+    };
+    rafId = requestAnimationFrame(tryScroll);
+    return () => cancelAnimationFrame(rafId);
   }, [pathname, hash]);
 
   return null;

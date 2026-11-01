@@ -1,7 +1,9 @@
 import { useState } from "react";
-import { Helmet } from "react-helmet-async";
+import Seo from "@/components/Seo";
+import { CONTACT_EMAIL, absoluteUrl } from "@/lib/site";
+import { ORGANIZATION_ID } from "@/lib/structuredData";
 import { motion } from "framer-motion";
-import { Mail, MessageSquare, MapPin, Clock, Send, Loader2, Building2 } from "lucide-react";
+import { Mail, MapPin, Clock, Send, Loader2, Building2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WaitlistModal from "@/components/WaitlistModal";
@@ -18,6 +20,40 @@ const addresses = {
     "No. 44, New Manglam Complex, Shobhagpura, Udaipur, Rajasthan – 313001, India",
 };
 
+// Structured address data for the two addresses above (keep in sync).
+const contactPageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  url: absoluteUrl("/contact"),
+  mainEntity: {
+    "@type": "Organization",
+    "@id": ORGANIZATION_ID,
+    name: "AppDrop",
+    email: CONTACT_EMAIL,
+    address: [
+      {
+        "@type": "PostalAddress",
+        name: "Registered Office",
+        streetAddress: "No. 44, New Manglam Complex, Shobhagpura",
+        addressLocality: "Udaipur",
+        addressRegion: "Rajasthan",
+        postalCode: "313001",
+        addressCountry: "IN",
+      },
+      {
+        "@type": "PostalAddress",
+        name: "Office",
+        streetAddress:
+          "D42 Dr. Ambedkar Colony, 100 Feet Rd, opposite Vishal Megamart, Phase 1, Chattarpur Enclave",
+        addressLocality: "New Delhi",
+        addressRegion: "Delhi",
+        postalCode: "110074",
+        addressCountry: "IN",
+      },
+    ],
+  },
+};
+
 const contactInfo = [
   {
     icon: Mail,
@@ -25,13 +61,6 @@ const contactInfo = [
     description: "hello@appdrop.co",
     detail: "For general enquiries and support",
     href: "mailto:hello@appdrop.co",
-  },
-  {
-    icon: MessageSquare,
-    title: "Live Chat",
-    description: "Chat with our team",
-    detail: "Available Mon–Fri, 10:00 AM – 6:00 PM IST",
-    href: undefined,
   },
   {
     icon: Clock,
@@ -83,14 +112,12 @@ const Contact = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Contact Us - AppDrop | Get in Touch</title>
-        <meta 
-          name="description" 
-          content="Have questions about AppDrop? Contact our team. We're here to help you launch your Shopify mobile app." 
-        />
-        <link rel="canonical" href="https://appdrop.io/contact" />
-      </Helmet>
+      <Seo
+        title="Contact AppDrop - Get in Touch"
+        description="Questions about AppDrop? Email hello@appdrop.co or send our team a message. We help Shopify merchants launch and grow their native mobile apps."
+        path="/contact"
+        jsonLd={contactPageJsonLd}
+      />
 
       <div className="min-h-dvh bg-background">
         <Navbar onOpenWaitlist={() => setIsWaitlistOpen(true)} />
@@ -117,7 +144,8 @@ const Contact = () => {
           </section>
 
           {/* Contact Info Cards */}
-          <section className="section-container mb-12 sm:mb-16">
+          <section className="section-container mb-12 sm:mb-16" aria-labelledby="contact-details-heading">
+            <h2 id="contact-details-heading" className="sr-only">Contact details</h2>
             <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
               {contactInfo.map((info, index) => (
                 <motion.div
@@ -125,7 +153,7 @@ const Contact = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-card rounded-2xl p-5 sm:p-6 border border-border/50 text-center flex flex-col items-center w-full sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)] max-w-[427px] min-h-[180px] sm:min-h-[200px]"
+                  className="bg-card rounded-2xl p-5 sm:p-6 border border-border/50 text-center flex flex-col items-center w-full sm:w-[calc((100%-1.5rem)/2)] max-w-[427px] min-h-[180px] sm:min-h-[200px]"
                 >
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 shrink-0">
                     <info.icon className="w-6 h-6 text-primary" />
@@ -199,9 +227,9 @@ const Contact = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="message">Message *</Label>
+                    <Label htmlFor="contact-message">Message *</Label>
                     <Textarea
-                      id="message"
+                      id="contact-message"
                       placeholder="Tell us more about your question..."
                       value={formData.message}
                       onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}

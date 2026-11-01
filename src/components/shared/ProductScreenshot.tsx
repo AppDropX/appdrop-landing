@@ -11,8 +11,8 @@ const ProductScreenshot = ({ src, alt, className }: ProductScreenshotProps) => (
     <img
       src={src}
       alt={alt}
-      width={2048}
-      height={1154}
+      width={1600}
+      height={902}
       className="block w-full h-auto select-none"
       loading="lazy"
       decoding="async"
