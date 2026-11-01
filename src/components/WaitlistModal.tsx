@@ -4,6 +4,15 @@ import { X, CheckCircle, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import HoneypotField from "@/components/HoneypotField";
+import {
+  CONTACT_LIMITS,
+  EMAIL_PATTERN,
+  GENERIC_ERROR_MESSAGE,
+  RATE_LIMIT_MESSAGE,
+  isValidPhone,
+  submitContact,
+} from "@/lib/contact";
 
 interface WaitlistModalProps {
   isOpen: boolean;
@@ -24,14 +33,21 @@ const initialFormData: FormData = {
   companyName: "",
 };
 
-const SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbyXWp1wuYN5Hz7qIJASI2-dPr4e4wSVe6bkaI0jxNVF5XI03FMKJ8PCt_3Ku0NvshNgHw/exec";
+// Server field name (TASK-028 contract) -> form field.
+const serverFieldMap: Record<string, keyof FormData> = {
+  name: "fullName",
+  email: "email",
+  phone: "phone",
+  company_name: "companyName",
+};
 
 const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState<Partial<FormData>>({});
+  const [formError, setFormError] = useState<string | null>(null);
+  const [website, setWebsite] = useState("");
 
   const handleClose = useCallback(() => {
     onClose();
@@ -39,6 +55,8 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
       setFormData(initialFormData);
       setIsSubmitted(false);
       setErrors({});
+      setFormError(null);
+      setWebsite("");
     }, 300);
   }, [onClose]);
 
@@ -64,12 +82,15 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
 
     if (!formData.email.trim()) {
       newErrors.email = "Email is required";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+    } else if (!EMAIL_PATTERN.test(formData.email.trim())) {
       newErrors.email = "Please enter a valid email";
     }
 
-    if (!formData.phone.trim())
+    if (!formData.phone.trim()) {
       newErrors.phone = "Contact number is required";
+    } else if (!isValidPhone(formData.phone.trim())) {
+      newErrors.phone = "Please enter a valid contact number";
+    }
 
     if (!formData.companyName.trim())
       newErrors.companyName = "Company name is required";
@@ -83,25 +104,43 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
     if (!validateForm()) return;
 
     setIsSubmitting(true);
+    setFormError(null);
 
-    try {
-      const body = new URLSearchParams({
-        name: formData.fullName,
-        email: formData.email,
-        phone: formData.phone,
-        companyName: formData.companyName,
-      });
+    const result = await submitContact({
+      kind: "demo_request",
+      name: formData.fullName.trim(),
+      email: formData.email.trim(),
+      phone: formData.phone.trim(),
+      company_name: formData.companyName.trim(),
+      source_page: window.location.pathname,
+      website,
+    });
 
-      await fetch(SCRIPT_URL, {
-        method: "POST",
-        body,
-      });
+    setIsSubmitting(false);
 
-      setIsSubmitted(true);
-    } catch (err) {
-      console.error("Failed to submit waitlist", err);
-    } finally {
-      setIsSubmitting(false);
+    switch (result.status) {
+      case "success":
+        setIsSubmitted(true);
+        break;
+      case "validation": {
+        const fieldErrors: Partial<FormData> = {};
+        let unmapped = false;
+        for (const [field, message] of Object.entries(result.errors)) {
+          const formField = serverFieldMap[field];
+          if (formField) fieldErrors[formField] = message;
+          else unmapped = true;
+        }
+        setErrors(fieldErrors);
+        if (unmapped || Object.keys(fieldErrors).length === 0) {
+          setFormError("Please check your details and try again.");
+        }
+        break;
+      }
+      case "rate_limited":
+        setFormError(RATE_LIMIT_MESSAGE);
+        break;
+      default:
+        setFormError(GENERIC_ERROR_MESSAGE);
     }
   };
 
@@ -110,6 +149,7 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
     if (errors[field]) {
       setErrors((p) => ({ ...p, [field]: undefined }));
     }
+    if (formError) setFormError(null);
   };
 
   return (
@@ -153,11 +193,13 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
                       </p>
                     </div>
 
-                    <form onSubmit={handleSubmit} className="space-y-4">
+                    <form onSubmit={handleSubmit} className="relative space-y-4" noValidate>
+                      <HoneypotField value={website} onChange={setWebsite} />
                       <div>
                         <Label>Full Name *</Label>
                         <Input
                           value={formData.fullName}
+                          maxLength={CONTACT_LIMITS.name}
                           onChange={(e) =>
                             handleInputChange("fullName", e.target.value)
                           }
@@ -173,6 +215,7 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
                         <Label>Email *</Label>
                         <Input
                           value={formData.email}
+                          maxLength={CONTACT_LIMITS.email}
                           onChange={(e) =>
                             handleInputChange("email", e.target.value)
                           }
@@ -188,6 +231,7 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
                         <Label>Contact Number *</Label>
                         <Input
                           value={formData.phone}
+                          maxLength={CONTACT_LIMITS.phone}
                           onChange={(e) =>
                             handleInputChange("phone", e.target.value)
                           }
@@ -203,6 +247,7 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
                         <Label>Company Name *</Label>
                         <Input
                           value={formData.companyName}
+                          maxLength={CONTACT_LIMITS.companyName}
                           onChange={(e) =>
                             handleInputChange("companyName", e.target.value)
                           }
@@ -214,6 +259,12 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
                         )}
                       </div>
 
+                      {formError && (
+                        <p className="text-sm text-destructive text-center" role="alert">
+                          {formError}
+                        </p>
+                      )}
+
                       <Button
                         type="submit"
                         variant="hero"
@@ -224,7 +275,7 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
                         {isSubmitting ? (
                           <>
                             <Loader2 className="animate-spin mr-2" />
-                            Joining…
+                            Submitting…
                           </>
                         ) : (
                           "Book Demo"
