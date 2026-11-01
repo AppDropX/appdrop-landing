@@ -19,6 +19,21 @@ export const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export const isValidPhone = (phone: string): boolean =>
   /^[0-9 +\-().]+$/.test(phone) && (phone.match(/\d/g)?.length ?? 0) >= 6;
 
+// Requests that take longer than this are aborted and treated as a network error.
+export const REQUEST_TIMEOUT_MS = 15000;
+
+const timeoutSignal = (ms: number): AbortSignal | undefined => {
+  if (typeof AbortSignal !== "undefined" && typeof AbortSignal.timeout === "function") {
+    return AbortSignal.timeout(ms);
+  }
+  if (typeof AbortController !== "undefined") {
+    const controller = new AbortController();
+    setTimeout(() => controller.abort(), ms);
+    return controller.signal;
+  }
+  return undefined;
+};
+
 export const RATE_LIMIT_MESSAGE =
   "Too many attempts, please try again in a few minutes";
 export const GENERIC_ERROR_MESSAGE =
@@ -67,8 +82,10 @@ export async function submitContact(
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
+      signal: timeoutSignal(REQUEST_TIMEOUT_MS),
     });
   } catch {
+    // Network failure, CORS failure, or timeout abort.
     return { status: "error" };
   }
 

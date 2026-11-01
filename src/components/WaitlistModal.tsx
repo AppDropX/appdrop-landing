@@ -112,7 +112,7 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
       email: formData.email.trim(),
       phone: formData.phone.trim(),
       company_name: formData.companyName.trim(),
-      source_page: window.location.pathname,
+      source_page: window.location.pathname.slice(0, 200),
       website,
     });
 
