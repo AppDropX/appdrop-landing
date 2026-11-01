@@ -7,7 +7,7 @@ import {
   ShoppingCart,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import mobileScreenImage from "@/assets/mobile-screen.png";
+import mobileScreenImage from "@/assets/mobile-screen.webp";
 import { APPDROP_BUILDER_URL } from "@/lib/urls";
 
 const heroStats = [
@@ -152,6 +152,11 @@ const HeroSection = () => {
               <img
                 src={mobileScreenImage}
                 alt="AppDrop mobile app preview"
+                width={512}
+                height={1024}
+                // LCP image: never lazy. React 18 has no fetchPriority prop, so pass the raw attribute.
+                {...{ fetchpriority: "high" }}
+                decoding="async"
                 className="w-44 sm:w-60 md:w-72 lg:w-80 xl:w-[22rem] max-w-[min(70vw,22rem)] h-auto object-contain drop-shadow-2xl"
               />
             </div>

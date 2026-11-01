@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Helmet } from "react-helmet-async";
+import Seo from "@/components/Seo";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -10,14 +10,11 @@ const Terms = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Terms of Use - AppDrop</title>
-        <meta
-          name="description"
-          content="AppDrop Terms of Use — the legally binding agreement between you and DoMySale Private Limited for using the AppDrop Platform."
-        />
-        <link rel="canonical" href="https://appdrop.io/terms" />
-      </Helmet>
+      <Seo
+        title="Terms of Use - AppDrop"
+        description="AppDrop Terms of Use: the legally binding agreement between you and DoMySale Private Limited that governs your use of the AppDrop platform."
+        path="/terms"
+      />
 
       <div className="min-h-dvh bg-background">
         <Navbar onOpenWaitlist={() => setIsWaitlistOpen(true)} />

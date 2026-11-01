@@ -148,8 +148,10 @@ const Navbar = ({ onOpenWaitlist }: NavbarProps) => {
             <div className="flex items-center justify-between h-14 sm:h-[72px]">
               <Link to="/" className="flex items-center shrink-0">
                 <img
-                  src="https://cdn.shopify.com/s/files/1/0734/7155/7942/files/AppDrop_Black_Logo.png?v=1766657135"
+                  src="https://cdn.shopify.com/s/files/1/0734/7155/7942/files/AppDrop_Black_Logo.png?v=1766657135&width=320"
                   alt="AppDrop logo"
+                  width={138}
+                  height={32}
                   className="h-7 sm:h-8 w-auto object-contain"
                 />
               </Link>

@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { Helmet } from "react-helmet-async";
+import Seo from "@/components/Seo";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Heart, Target, Users, Zap } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WaitlistModal from "@/components/WaitlistModal";
-import appdropLogoIcon from "@/assets/appdrop-logo-icon.png";
-import parthPhoto from "@/assets/parth-pahuja.png";
+import appdropLogoIcon from "@/assets/appdrop-logo-icon-960.webp";
+import parthPhoto from "@/assets/parth-pahuja.webp";
 
 const heroMeta = [
   { value: "2026", label: "founded" },
@@ -73,14 +73,11 @@ const About = () => {
 
   return (
     <>
-      <Helmet>
-        <title>About AppDrop — Empowering Shopify Merchants</title>
-        <meta
-          name="description"
-          content="AppDrop is a no-code mobile app builder for Shopify stores. Meet the team building mobile commerce for every merchant."
-        />
-        <link rel="canonical" href="https://appdrop.io/about" />
-      </Helmet>
+      <Seo
+        title="About AppDrop - Mobile Apps for Shopify Merchants"
+        description="AppDrop is a no-code mobile app builder for Shopify stores. Meet the team helping every merchant launch and own a native mobile shopping channel."
+        path="/about"
+      />
 
       <div className="min-h-dvh bg-background w-full">
         <Navbar onOpenWaitlist={() => setIsWaitlistOpen(true)} />
@@ -91,6 +88,9 @@ const About = () => {
               src={appdropLogoIcon}
               alt=""
               aria-hidden="true"
+              width={960}
+              height={960}
+              decoding="async"
               className="about-hero-mark"
             />
             <div className="section-container">

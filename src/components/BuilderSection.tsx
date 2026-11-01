@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Check, Smartphone, Store, WandSparkles } from "lucide-react";
-import builderThemePages from "@/assets/builder-theme-pages.png";
+import builderThemePages from "@/assets/builder-theme-pages.webp";
 import MacWindow from "@/components/shared/MacWindow";
 import ProductScreenshot from "@/components/shared/ProductScreenshot";
 

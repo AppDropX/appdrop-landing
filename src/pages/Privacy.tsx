@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Helmet } from "react-helmet-async";
+import Seo from "@/components/Seo";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -10,14 +10,11 @@ const Privacy = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Privacy Policy - AppDrop</title>
-        <meta
-          name="description"
-          content="AppDrop's privacy policy explains how DoMySale Private Limited collects, uses, stores, and protects your personal data."
-        />
-        <link rel="canonical" href="https://appdrop.io/privacy" />
-      </Helmet>
+      <Seo
+        title="Privacy Policy - AppDrop"
+        description="AppDrop's privacy policy explains how DoMySale Private Limited collects, uses, stores and protects your personal data on the AppDrop platform."
+        path="/privacy"
+      />
 
       <div className="min-h-dvh bg-background">
         <Navbar onOpenWaitlist={() => setIsWaitlistOpen(true)} />

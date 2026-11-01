@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Helmet } from "react-helmet-async";
+import Seo from "@/components/Seo";
 import { motion } from "framer-motion";
 import { 
   Smartphone, 
@@ -87,14 +87,11 @@ const Features = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Features - AppDrop | Visual Mobile App Builder for Shopify</title>
-        <meta 
-          name="description" 
-          content="Explore AppDrop Builder features: drag-and-drop mobile app design, live preview, theme customization, push notifications, analytics, and Shopify connection coming soon." 
-        />
-        <link rel="canonical" href="https://appdrop.io/features" />
-      </Helmet>
+      <Seo
+        title="Features - AppDrop Shopify Mobile App Builder"
+        description="Explore AppDrop Builder features: drag-and-drop app design, live preview, theme customization, push notifications and analytics for Shopify stores."
+        path="/features"
+      />
 
       <div className="min-h-dvh bg-background">
         <Navbar onOpenWaitlist={() => setIsWaitlistOpen(true)} />

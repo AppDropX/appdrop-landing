@@ -45,6 +45,10 @@ const TrustSection = () => {
                 <img
                   src={tech.logo}
                   alt={`${tech.name} logo`}
+                  width={64}
+                  height={64}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-contain opacity-85 transition-all duration-300 group-hover:opacity-100 group-hover:scale-110"
                 />
               </div>
