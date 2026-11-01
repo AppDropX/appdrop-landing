@@ -4,6 +4,9 @@ import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  // Expose VITE_* plus API_BASE_URL (the name already set on the landing
+  // Vercel project) to client code via import.meta.env.
+  envPrefix: ["VITE_", "API_BASE_URL"],
   server: {
     host: "::",
     port: 8080,

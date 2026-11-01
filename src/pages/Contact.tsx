@@ -10,6 +10,14 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import HoneypotField from "@/components/HoneypotField";
+import {
+  CONTACT_LIMITS,
+  EMAIL_PATTERN,
+  GENERIC_ERROR_MESSAGE,
+  RATE_LIMIT_MESSAGE,
+  submitContact,
+} from "@/lib/contact";
 
 const addresses = {
   office:
@@ -65,20 +73,57 @@ const Contact = () => {
     subject: "",
     message: "",
   });
+  const [website, setWebsite] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) {
+    const name = formData.name.trim();
+    const email = formData.email.trim();
+    const subject = formData.subject.trim();
+    const message = formData.message.trim();
+
+    if (!name || !email || !message) {
       toast.error("Please fill in all required fields");
+      return;
+    }
+    if (!EMAIL_PATTERN.test(email)) {
+      toast.error("Please enter a valid email");
       return;
     }
 
     setIsSubmitting(true);
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    const result = await submitContact({
+      kind: "contact_message",
+      name,
+      email,
+      subject,
+      message,
+      source_page: "/contact",
+      website,
+    });
     setIsSubmitting(false);
-    toast.success("Message sent! We'll get back to you soon.");
-    setFormData({ name: "", email: "", subject: "", message: "" });
+
+    switch (result.status) {
+      case "success":
+        toast.success("Message sent! We'll get back to you soon.");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        setWebsite("");
+        break;
+      case "validation": {
+        const fieldMessages = Object.values(result.errors);
+        toast.error(
+          fieldMessages.length > 0
+            ? fieldMessages.join(". ")
+            : "Please check your details and try again.",
+        );
+        break;
+      }
+      case "rate_limited":
+        toast.error(RATE_LIMIT_MESSAGE);
+        break;
+      default:
+        toast.error(GENERIC_ERROR_MESSAGE);
+    }
   };
 
   return (
@@ -162,7 +207,8 @@ const Contact = () => {
                   Send us a Message
                 </h2>
                 
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="relative space-y-6" noValidate>
+                  <HoneypotField value={website} onChange={setWebsite} />
                   <div className="grid sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <Label htmlFor="name">Name *</Label>
@@ -170,6 +216,7 @@ const Contact = () => {
                         id="name"
                         placeholder="Your name"
                         value={formData.name}
+                        maxLength={CONTACT_LIMITS.name}
                         onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
                         className="h-12 rounded-xl bg-muted/50 border-border/50"
                       />
@@ -181,6 +228,7 @@ const Contact = () => {
                         type="email"
                         placeholder="you@company.com"
                         value={formData.email}
+                        maxLength={CONTACT_LIMITS.email}
                         onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
                         className="h-12 rounded-xl bg-muted/50 border-border/50"
                       />
@@ -193,6 +241,7 @@ const Contact = () => {
                       id="subject"
                       placeholder="How can we help?"
                       value={formData.subject}
+                      maxLength={CONTACT_LIMITS.subject}
                       onChange={(e) => setFormData(prev => ({ ...prev, subject: e.target.value }))}
                       className="h-12 rounded-xl bg-muted/50 border-border/50"
                     />
@@ -204,6 +253,7 @@ const Contact = () => {
                       id="message"
                       placeholder="Tell us more about your question..."
                       value={formData.message}
+                      maxLength={CONTACT_LIMITS.message}
                       onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
                       className="min-h-[150px] rounded-xl bg-muted/50 border-border/50 resize-none"
                     />
