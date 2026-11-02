@@ -8,6 +8,7 @@ import { lazy, Suspense } from "react";
 import Index from "./pages/Index";
 import ScrollProgressBar from "./components/ScrollProgressBar";
 import ScrollToTop from "./components/ScrollToTop";
+import RouteErrorBoundary from "./components/RouteErrorBoundary";
 
 // Index stays eager (most traffic lands there); other routes load on demand.
 const Features = lazy(() => import("./pages/Features"));
@@ -30,18 +31,20 @@ const App = () => (
         <BrowserRouter>
           <ScrollToTop />
           <ScrollProgressBar />
-          <Suspense fallback={<RouteFallback />}>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/features" element={<Features />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/privacy" element={<Privacy />} />
-              <Route path="/terms" element={<Terms />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
+          <RouteErrorBoundary>
+            <Suspense fallback={<RouteFallback />}>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/features" element={<Features />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/privacy" element={<Privacy />} />
+                <Route path="/terms" element={<Terms />} />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+          </RouteErrorBoundary>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>

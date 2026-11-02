@@ -156,7 +156,6 @@ const HeroSection = () => {
                 height={1024}
                 // LCP image: never lazy. React 18 has no fetchPriority prop, so pass the raw attribute.
                 {...{ fetchpriority: "high" }}
-                decoding="async"
                 className="w-44 sm:w-60 md:w-72 lg:w-80 xl:w-[22rem] max-w-[min(70vw,22rem)] h-auto object-contain drop-shadow-2xl"
               />
             </div>

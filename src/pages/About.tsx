@@ -90,6 +90,7 @@ const About = () => {
               aria-hidden="true"
               width={960}
               height={960}
+              loading="lazy"
               decoding="async"
               className="about-hero-mark"
             />
